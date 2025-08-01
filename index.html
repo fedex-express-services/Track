@@ -33,242 +33,42 @@
     * {
       font-family: 'Source Sans Pro', Arial, sans-serif;
     }
-
-    .fedex-shadow {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-
-    .fedex-button {
-      background: #4D148C;
-      transition: all 0.3s ease;
-    }
-
-    .fedex-button:hover {
-      background: #3D0F6B;
-      transform: translateY(-1px);
-    }
-
-    .progress-container {
-      position: relative;
-      background: #E5E7EB;
-      height: 8px;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
-      background: linear-gradient(90deg, #FF6200, #4D148C);
-      height: 100%;
-      border-radius: 4px;
-      transition: width 2s ease-in-out;
-      position: relative;
-    }
-
-    .progress-bar::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      animation: shimmer 2s infinite;
-    }
-
-    @keyframes shimmer {
-      0% { transform: translateX(-100%); }
-      100% { transform: translateX(100%); }
-    }
-
-    .modal-backdrop {
-      backdrop-filter: blur(4px);
-    }
-
-    .page-section {
-      display: none;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .animate-fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    .timeline-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      position: absolute;
-      left: -6px;
-      top: 6px;
-    }
-
-    .timeline-line {
-      width: 2px;
-      background: #E5E7EB;
-      position: absolute;
-      left: -1px;
-      top: 18px;
-      bottom: -18px;
-    }
+    .fedex-shadow { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .fedex-button { background: #4D148C; transition: all 0.3s ease; }
+    .fedex-button:hover { background: #3D0F6B; transform: translateY(-1px); }
+    .progress-bar { background: linear-gradient(90deg, #FF6200, #4D148C); transition: width 2s ease-in-out; }
+    .modal-backdrop { backdrop-filter: blur(4px); }
+    .page-section, .modal { display: none; }
+    .page-section.active, .modal.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in { animation: fadeIn 0.5s ease-out; }
     
-    .timeline-item:last-child .timeline-line {
-        display: none;
-    }
-
-    .map-container {
-      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .status-badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-weight: 600;
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .status-registered { background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D;}
-    .status-in-transit { background: #DBEAFE; color: #1E40AF; border: 1px solid #93C5FD;}
-    .status-delivered { background: #D1FAE5; color: #065F46; border: 1px solid #6EE7B7;}
-    .status-clearance { background: #FEF3C7; color: #B45309; border: 1px solid #FCD34D; }
-
-
-    .clearance-notice {
-      background: linear-gradient(135deg, #FEF3C7, #FDE68A);
-      border-left: 4px solid #F59E0B;
-    }
-
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      padding: 1rem 1.5rem;
-      border-radius: 8px;
-      color: white;
-      font-weight: 600;
-      z-index: 10000; /* Ensure notification is on top of admin dashboard */
-      animation: slideInRight 0.5s ease-out;
-      max-width: 350px;
-    }
-
+    .notification { position: fixed; top: 20px; right: 20px; padding: 1rem 1.5rem; border-radius: 8px; color: white; font-weight: 600; z-index: 10001; animation: slideInRight 0.5s ease-out; max-width: 350px; }
     .notification.success { background: #059669; }
     .notification.error { background: #DC2626; }
-    .notification.info { background: #0284C7; }
-    .notification.warning { background: #D97706; }
+    @keyframes slideInRight { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
-    @keyframes slideInRight {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    .loading-spinner {
-      display: inline-block;
-      width: 20px;
-      height: 20px;
-      border: 2px solid #f3f3f3;
-      border-top: 2px solid #FF6200;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    @media (max-width: 768px) {
-      .modal-content {
-        width: 95%;
-        max-height: 85vh;
-        margin: 2rem;
-      }
-    }
+    .loading-spinner { display: inline-block; width: 20px; height: 20px; border: 2px solid #f3f3f3; border-top: 2px solid #FF6200; border-radius: 50%; animation: spin 1s linear infinite; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
     /* Admin Dashboard Styles */
-    #admin-dashboard {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(245, 245, 245, 1);
-      z-index: 9999;
-      overflow-y: auto;
-      transition: opacity 0.3s ease;
-    }
-
-    .admin-form-section {
-        display: none;
-    }
-
-    .admin-form-section.active {
-        display: block;
-        animation: fadeIn 0.5s ease-out;
-    }
+    #admin-dashboard { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #F5F5F5; z-index: 9999; overflow-y: auto; transition: opacity 0.3s ease; display: none; }
+    .admin-form-section { display: none; }
+    .admin-form-section.active { display: block; animation: fadeIn 0.5s ease-out; }
+    .admin-table-container { overflow-x: auto; }
+    .admin-table { width: 100%; min-width: 800px; border-collapse: collapse; }
+    .admin-table th, .admin-table td { padding: 12px 16px; border-bottom: 1px solid #ddd; text-align: left; }
+    .admin-table th { background-color: #e9e9e9; font-weight: 600; color: #333; }
+    .admin-table tr:hover { background-color: #f0f0f0; }
+    .admin-input { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 8px; transition: border-color 0.3s; }
+    .admin-input:focus { border-color: #4D148C; outline: none; }
+    .admin-label { font-weight: 600; margin-bottom: 6px; display: block; }
+    .admin-nav-button { padding: 10px 20px; border-radius: 8px; font-weight: 600; transition: all 0.3s; cursor: pointer; }
+    .admin-nav-button.active { background-color: #4D148C; color: white; }
+    .admin-nav-button:not(.active) { color: #333; background-color: white; }
     
-    .admin-table-container {
-      overflow-x: auto;
-    }
-
-    .admin-table {
-        width: 100%;
-        min-width: 800px;
-        border-collapse: collapse;
-    }
-    .admin-table th, .admin-table td {
-        padding: 12px 16px;
-        border-bottom: 1px solid #ddd;
-        text-align: left;
-    }
-    .admin-table th {
-        background-color: #f2f2f2;
-        font-weight: 600;
-        color: #333;
-    }
-    .admin-table tr:hover {
-        background-color: #f9f9f9;
-    }
-    
-    .admin-input {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-    }
-
-    .admin-label {
-      font-weight: 600;
-      margin-bottom: 6px;
-      display: block;
-    }
-    
-    .timeline-editor-entry {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 2fr auto;
-        gap: 1rem;
-        align-items: center;
-        margin-bottom: 1rem;
-    }
-    
-    @media (max-width: 768px) {
-       .timeline-editor-entry {
-           grid-template-columns: 1fr;
-       }
-    }
-
+    .service-card { transition: all 0.3s ease; cursor: pointer; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
   </style>
 </head>
 
@@ -277,58 +77,94 @@
   <header class="bg-white border-b border-gray-200 sticky top-0 z-40">
     <div class="max-w-7xl mx-auto px-4 py-4">
       <div class="flex items-center justify-between">
-        <!-- FedEx Logo -->
-        <div id="fedex-logo" class="flex items-center cursor-pointer" onclick="showPage('main')">
+        <div id="fedex-logo" class="flex items-center cursor-pointer" onclick="handleLogoClick()">
           <div class="bg-fedex-purple text-white px-3 py-2 font-bold text-2xl">Fed</div>
           <div class="bg-fedex-orange text-white px-3 py-2 font-bold text-2xl">Ex</div>
         </div>
-
-        <!-- Navigation -->
         <nav class="hidden lg:flex space-x-8">
           <a href="#" class="text-fedex-dark-gray hover:text-fedex-purple font-semibold" onclick="showModal('ship-modal')">Ship</a>
-          <a href="#" class="text-fedex-purple font-semibold border-b-2 border-fedex-orange pb-3" onclick="showPage('main')">Track</a>
+          <a href="#" class="text-fedex-purple font-semibold border-b-2 border-fedex-orange pb-3" onclick="showPage('main-page')">Track</a>
           <a href="#" class="text-fedex-dark-gray hover:text-fedex-purple font-semibold" onclick="showModal('manage-modal')">Manage</a>
           <a href="#" class="text-fedex-dark-gray hover:text-fedex-purple font-semibold" onclick="showModal('support-modal')">Support</a>
         </nav>
-
-        <!-- Mobile Menu -->
-        <button class="lg:hidden p-2" onclick="toggleMobileMenu()">
-          <i class="fas fa-bars text-2xl text-fedex-dark-gray"></i>
-        </button>
+        <button class="lg:hidden p-2" onclick="toggleMobileMenu()"><i class="fas fa-bars text-2xl text-fedex-dark-gray"></i></button>
       </div>
     </div>
   </header>
   
   <!-- Main Content Container -->
   <div id="content-container">
-    <!-- MAIN TRACKING PAGE -->
     <div id="main-page" class="page-section active">
-      <main class="min-h-screen bg-fedex-light-gray">
+      <main class="bg-fedex-light-gray">
         <!-- Hero Section -->
         <section class="bg-white py-12">
           <div class="max-w-6xl mx-auto px-4">
             <div class="text-center mb-8">
-              <h1 class="text-4xl font-bold text-fedex-dark-gray mb-4">Track Your Package</h1>
-              <p class="text-xl text-fedex-gray">Enter your tracking number to get real-time updates</p>
+              <h1 class="text-4xl lg:text-5xl font-bold text-fedex-dark-gray mb-4">Track Your Package</h1>
+              <p class="text-xl text-fedex-gray">Enter your tracking number for real-time updates</p>
             </div>
-
-            <!-- Tracking Form -->
             <div class="max-w-2xl mx-auto">
               <div class="bg-white border border-gray-200 rounded-lg fedex-shadow p-6">
                 <form id="tracking-form">
-                  <div class="mb-4">
-                    <label class="block text-lg font-semibold text-fedex-dark-gray mb-3">
-                      Track by tracking number
-                    </label>
-                    <div class="relative">
-                      <input type="text" id="tracking-number" required="" class="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-lg focus:border-fedex-purple focus:outline-none transition-colors" placeholder="Enter tracking number (e.g., FD26031998KR)">
-                      <button type="submit" id="track-button" class="absolute right-2 top-2 fedex-button text-white px-6 py-2 rounded-lg font-semibold hover:bg-fedex-dark-gray transition-colors">
-                        <span id="track-text">Track</span>
-                        <span id="track-loading" class="hidden"><div class="loading-spinner"></div></span>
-                      </button>
-                    </div>
+                  <div class="relative">
+                    <input type="text" id="tracking-number" required class="w-full px-4 py-4 text-lg border-2 border-gray-300 rounded-lg focus:border-fedex-purple focus:outline-none" placeholder="e.g., FD26031998KR">
+                    <button type="submit" id="track-button" class="absolute right-2 top-2 fedex-button text-white px-6 py-2 rounded-lg font-semibold">
+                      <span id="track-text">Track</span>
+                      <span id="track-loading" class="hidden"><div class="loading-spinner"></div></span>
+                    </button>
                   </div>
                 </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="py-16">
+          <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-fedex-dark-gray text-center mb-10">Our Services</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div class="service-card bg-white rounded-lg fedex-shadow p-8 text-center" onclick="showModal('ship-modal')">
+                <div class="w-20 h-20 bg-fedex-purple rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-shipping-fast text-white text-3xl"></i></div>
+                <h3 class="text-2xl font-bold text-fedex-dark-gray mb-3">Ship</h3>
+                <p class="text-fedex-gray">Create shipping labels, schedule pickups, and manage your shipments effortlessly.</p>
+              </div>
+              <div class="service-card bg-white rounded-lg fedex-shadow p-8 text-center" onclick="showPage('main-page')">
+                <div class="w-20 h-20 bg-fedex-orange rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-search-location text-white text-3xl"></i></div>
+                <h3 class="text-2xl font-bold text-fedex-dark-gray mb-3">Track</h3>
+                <p class="text-fedex-gray">Monitor your shipments in real-time from origin to destination with detailed updates.</p>
+              </div>
+              <div class="service-card bg-white rounded-lg fedex-shadow p-8 text-center" onclick="showModal('manage-modal')">
+                <div class="w-20 h-20 bg-fedex-blue rounded-full flex items-center justify-center mx-auto mb-5"><i class="fas fa-cog text-white text-3xl"></i></div>
+                <h3 class="text-2xl font-bold text-fedex-dark-gray mb-3">Manage</h3>
+                <p class="text-fedex-gray">Access your shipping history, manage delivery options, and set preferences.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Delivery Insights Section -->
+        <section class="py-16 bg-white">
+          <div class="max-w-6xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-fedex-dark-gray text-center mb-10">Connecting the World</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-white">
+              <div class="bg-gradient-to-br from-fedex-purple to-indigo-600 rounded-lg p-8">
+                <i class="fas fa-truck text-4xl opacity-75 mb-4"></i>
+                <p class="text-5xl font-bold mb-2">15M+</p>
+                <h3 class="text-xl font-bold">Daily Deliveries</h3>
+                <p class="opacity-90">Packages delivered worldwide every day.</p>
+              </div>
+              <div class="bg-gradient-to-br from-fedex-orange to-red-500 rounded-lg p-8">
+                <i class="fas fa-check-circle text-4xl opacity-75 mb-4"></i>
+                <p class="text-5xl font-bold mb-2">99.2%</p>
+                <h3 class="text-xl font-bold">On-Time Rate</h3>
+                <p class="opacity-90">Industry-leading delivery performance.</p>
+              </div>
+              <div class="bg-gradient-to-br from-fedex-green to-teal-600 rounded-lg p-8">
+                <i class="fas fa-globe-americas text-4xl opacity-75 mb-4"></i>
+                <p class="text-5xl font-bold mb-2">220+</p>
+                <h3 class="text-xl font-bold">Countries Served</h3>
+                <p class="opacity-90">A truly global transportation network.</p>
               </div>
             </div>
           </div>
@@ -337,284 +173,184 @@
     </div>
   </div>
 
-  <!-- Tracking Modal -->
-  <div id="tracking-modal" class="fixed inset-0 bg-black bg-opacity-50 modal-backdrop hidden items-center justify-center z-50 p-2 sm:p-4">
-    <div class="bg-white rounded-lg w-full max-w-7xl max-h-[95vh] overflow-y-auto animate-fade-in modal-content">
-      <!-- Modal Header -->
-      <div class="bg-fedex-purple text-white p-4 sm:p-6 rounded-t-lg sticky top-0 z-10">
-        <div class="flex justify-between items-center">
-          <div>
-            <h2 class="text-xl sm:text-2xl font-bold">Tracking Details</h2>
-            <p class="text-fedex-orange text-sm sm:text-lg font-semibold" id="modal-tracking-number"></p>
-          </div>
-          <button id="close-modal" class="text-white hover:text-fedex-orange text-xl sm:text-2xl">
-            <i class="fas fa-times"></i>
-          </button>
+  <!-- All Modals (Initially Hidden) -->
+  <div id="tracking-modal" class="modal fixed inset-0 bg-black bg-opacity-50 modal-backdrop items-center justify-center z-50 p-2">
+    <div class="bg-white rounded-lg w-full max-w-7xl max-h-[95vh] overflow-y-auto animate-fade-in">
+      <div class="bg-fedex-purple text-white p-6 rounded-t-lg sticky top-0 z-10 flex justify-between items-center">
+        <div>
+          <h2 class="text-2xl font-bold">Tracking Details</h2>
+          <p class="text-fedex-orange font-semibold" id="modal-tracking-number"></p>
         </div>
+        <button onclick="closeModal('tracking-modal')" class="text-2xl"><i class="fas fa-times"></i></button>
       </div>
-
-      <!-- Modal Content -->
-      <div class="p-4 sm:p-6" id="modal-content">
-        <!-- Content will be populated by JavaScript -->
-      </div>
+      <div class="p-6" id="modal-content"></div>
     </div>
   </div>
 
-  <!-- All other Modals (Ship, Manage, Support, etc.) would go here -->
-  <!-- ... -->
+  <div id="ship-modal" class="modal fixed inset-0 bg-black bg-opacity-50 modal-backdrop items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg max-w-lg w-full animate-fade-in">
+        <div class="p-6 flex justify-between items-center border-b">
+            <h2 class="text-2xl font-bold text-fedex-purple">Create a Shipment</h2>
+            <button onclick="closeModal('ship-modal')" class="text-2xl text-gray-500">×</button>
+        </div>
+        <div class="p-6">
+            <p>This is where the shipment creation flow would begin. For this simulation, you can create new shipments from the Admin Dashboard.</p>
+            <button onclick="closeModal('ship-modal'); handleLogoClick();" class="mt-4 fedex-button text-white w-full py-3 rounded-lg font-semibold">Go to Admin Dashboard</button>
+        </div>
+    </div>
+  </div>
+  
+  <div id="manage-modal" class="modal fixed inset-0 bg-black bg-opacity-50 modal-backdrop items-center justify-center z-50 p-4">
+     <div class="bg-white rounded-lg max-w-lg w-full animate-fade-in">
+        <div class="p-6 flex justify-between items-center border-b">
+            <h2 class="text-2xl font-bold text-fedex-purple">Manage Deliveries</h2>
+            <button onclick="closeModal('manage-modal')" class="text-2xl text-gray-500">×</button>
+        </div>
+        <div class="p-6">
+            <p>Here you could view your shipping history, set delivery preferences, and manage returns. This functionality is available in the Admin Dashboard for this simulation.</p>
+        </div>
+    </div>
+  </div>
+  
+  <div id="support-modal" class="modal fixed inset-0 bg-black bg-opacity-50 modal-backdrop items-center justify-center z-50 p-4">
+     <div class="bg-white rounded-lg max-w-lg w-full animate-fade-in">
+        <div class="p-6 flex justify-between items-center border-b">
+            <h2 class="text-2xl font-bold text-fedex-purple">Customer Support</h2>
+            <button onclick="closeModal('support-modal')" class="text-2xl text-gray-500">×</button>
+        </div>
+        <div class="p-6 space-y-4">
+            <p>Get help with shipments, accounts, and services.</p>
+            <p><i class="fas fa-phone mr-2 text-fedex-orange"></i> 1-800-Go-FedEx (1-800-463-3339)</p>
+            <p><i class="fas fa-comments mr-2 text-fedex-orange"></i> Live Chat available 24/7</p>
+        </div>
+    </div>
+  </div>
+  
+  <div id="admin-login-modal" class="modal fixed inset-0 bg-black bg-opacity-50 modal-backdrop items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-lg max-w-sm w-full animate-fade-in shadow-xl">
+        <div class="p-6 border-b">
+            <h2 class="text-2xl font-bold text-fedex-purple text-center">Admin Login</h2>
+        </div>
+        <form id="admin-login-form" class="p-8 space-y-6">
+            <div>
+                <label for="admin-username" class="admin-label">Username</label>
+                <input type="text" id="admin-username" class="admin-input" required value="admin">
+            </div>
+            <div>
+                <label for="admin-password" class="admin-label">Password</label>
+                <input type="password" id="admin-password" class="admin-input" required value="admin111">
+            </div>
+            <p id="login-error-msg" class="text-red-500 text-sm hidden">Invalid credentials. Please try again.</p>
+            <div class="flex space-x-4">
+                 <button type="button" onclick="closeModal('admin-login-modal')" class="w-1/2 border border-gray-400 text-gray-700 py-3 rounded-lg font-semibold">Cancel</button>
+                <button type="submit" class="w-1/2 fedex-button text-white py-3 rounded-lg font-semibold">Login</button>
+            </div>
+        </form>
+    </div>
+  </div>
+
 
   <!-- ADMIN DASHBOARD (Initially Hidden) -->
-  <div id="admin-dashboard" style="display: none;">
-    <div class="p-4 sm:p-8">
-        <!-- Admin Header -->
+  <div id="admin-dashboard">
+    <div class="p-4 sm:p-8 max-w-7xl mx-auto">
         <div class="flex justify-between items-center mb-8">
             <h1 class="text-3xl font-bold text-fedex-purple">Admin Dashboard</h1>
-            <button id="close-admin-dashboard" class="text-2xl text-gray-500 hover:text-fedex-orange">×</button>
+            <button onclick="hideAdminDashboard()" class="text-2xl text-gray-500 hover:text-fedex-orange">×</button>
         </div>
 
-        <!-- Admin Content: Table View -->
-        <div id="admin-table-view">
-            <div class="flex justify-between items-center mb-4">
-                <h2 class="text-2xl font-semibold text-fedex-dark-gray">All Shipments</h2>
-                <button id="show-create-form-btn" class="fedex-button text-white px-5 py-2 rounded-lg font-semibold">
-                    <i class="fas fa-plus mr-2"></i>Create Shipment
-                </button>
-            </div>
-            <div class="bg-white rounded-lg shadow-md p-4 admin-table-container">
-                <table class="admin-table" id="shipments-table">
-                    <thead>
-                        <tr>
-                            <th>Tracking #</th>
-                            <th>Status</th>
-                            <th>From</th>
-                            <th>To</th>
-                            <th>Service</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Shipment rows will be populated by JS -->
-                    </tbody>
-                </table>
-            </div>
+        <div class="flex space-x-2 mb-8 border-b">
+            <button id="admin-nav-shipments" class="admin-nav-button active" onclick="showAdminSection('admin-shipments-section')">Shipments</button>
+            <button id="admin-nav-security" class="admin-nav-button" onclick="showAdminSection('admin-security-section')">Security</button>
         </div>
 
-        <!-- Admin Content: Form View (Create/Edit) -->
-        <div id="admin-form-view" class="admin-form-section">
-            <h2 id="form-title" class="text-2xl font-semibold text-fedex-dark-gray mb-6">Create New Shipment</h2>
-            <form id="shipment-form" class="bg-white rounded-lg shadow-md p-6 space-y-8">
-                <input type="hidden" id="edit-mode-tracking-number">
-                
-                <!-- Basic Info -->
-                <fieldset class="border p-4 rounded-lg">
-                    <legend class="text-lg font-bold text-fedex-purple px-2">Basic Information</legend>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div>
-                            <label for="form-trackingNumber" class="admin-label">Tracking Number</label>
-                            <input type="text" id="form-trackingNumber" class="admin-input" required>
-                        </div>
-                        <div>
-                            <label for="form-status" class="admin-label">Status</label>
-                            <input type="text" id="form-status" class="admin-input" required>
-                        </div>
-                         <div>
-                            <label for="form-progress" class="admin-label">Progress (%)</label>
-                            <input type="number" id="form-progress" class="admin-input" min="0" max="100" value="0" required>
-                        </div>
-                        <div>
-                            <label for="form-service" class="admin-label">Service</label>
-                            <input type="text" id="form-service" class="admin-input" required>
-                        </div>
-                        <div>
-                            <label for="form-shipDate" class="admin-label">Ship Date</label>
-                            <input type="text" id="form-shipDate" class="admin-input" placeholder="e.g., June 22, 2025" required>
-                        </div>
-                         <div>
-                            <label for="form-estimatedDelivery" class="admin-label">Estimated Delivery</label>
-                            <input type="text" id="form-estimatedDelivery" class="admin-input" required>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <!-- Sender Info -->
-                <fieldset class="border p-4 rounded-lg">
-                    <legend class="text-lg font-bold text-fedex-purple px-2">Sender (From)</legend>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="form-sender-name" class="admin-label">Name</label>
-                            <input type="text" id="form-sender-name" class="admin-input">
-                        </div>
-                        <div>
-                            <label for="form-sender-company" class="admin-label">Company / Location</label>
-                            <input type="text" id="form-sender-company" class="admin-input">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="form-sender-address" class="admin-label">Address</label>
-                            <input type="text" id="form-sender-address" class="admin-input">
-                        </div>
-                        <div>
-                            <label for="form-sender-city" class="admin-label">City, Country</label>
-                            <input type="text" id="form-sender-city" class="admin-input">
-                        </div>
-                        <div>
-                            <label for="form-sender-phone" class="admin-label">Phone</label>
-                            <input type="text" id="form-sender-phone" class="admin-input">
-                        </div>
-                    </div>
-                </fieldset>
-
-                <!-- Recipient Info -->
-                <fieldset class="border p-4 rounded-lg">
-                    <legend class="text-lg font-bold text-fedex-purple px-2">Recipient (To)</legend>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label for="form-recipient-name" class="admin-label">Name</label>
-                            <input type="text" id="form-recipient-name" class="admin-input">
-                        </div>
-                         <div>
-                            <label for="form-recipient-email" class="admin-label">Email</label>
-                            <input type="email" id="form-recipient-email" class="admin-input">
-                        </div>
-                        <div class="md:col-span-2">
-                            <label for="form-recipient-address" class="admin-label">Address</label>
-                            <input type="text" id="form-recipient-address" class="admin-input">
-                        </div>
-                        <div>
-                            <label for="form-recipient-city" class="admin-label">City, State ZIP</label>
-                            <input type="text" id="form-recipient-city" class="admin-input">
-                        </div>
-                        <div>
-                            <label for="form-recipient-phone" class="admin-label">Phone</label>
-                            <input type="text" id="form-recipient-phone" class="admin-input">
-                        </div>
-                    </div>
-                </fieldset>
-                
-                 <!-- Timeline Editor -->
-                <fieldset class="border p-4 rounded-lg">
-                    <legend class="text-lg font-bold text-fedex-purple px-2">Shipment Timeline</legend>
-                    <div id="timeline-editor" class="space-y-4">
-                        <!-- Timeline entries will be populated by JS -->
-                    </div>
-                    <button type="button" id="add-timeline-entry-btn" class="mt-4 border border-fedex-blue text-fedex-blue px-4 py-2 rounded-lg font-semibold hover:bg-fedex-blue hover:text-white transition-colors">
-                        <i class="fas fa-plus mr-2"></i>Add Timeline Event
-                    </button>
-                </fieldset>
-
-
-                <!-- Form Actions -->
-                <div class="flex justify-end space-x-4">
-                    <button type="button" id="cancel-form-btn" class="border border-gray-400 text-gray-700 px-6 py-3 rounded-lg font-semibold">Cancel</button>
-                    <button type="submit" class="fedex-button text-white px-6 py-3 rounded-lg font-semibold">Save Shipment</button>
+        <div id="admin-shipments-section" class="admin-form-section active">
+            <div id="admin-table-view">
+                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4">
+                    <h2 class="text-2xl font-semibold text-fedex-dark-gray mb-4 sm:mb-0">All Shipments</h2>
+                    <button id="show-create-form-btn" class="fedex-button text-white px-5 py-2 rounded-lg font-semibold"><i class="fas fa-plus mr-2"></i>Create Shipment</button>
                 </div>
-            </form>
+                <div class="bg-white rounded-lg shadow-md p-4 admin-table-container">
+                    <table class="admin-table" id="shipments-table">
+                        <thead><tr><th>Tracking #</th><th>Status</th><th>From</th><th>To</th><th>Service</th><th>Actions</th></tr></thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="admin-form-view" class="hidden">
+                 <h2 id="form-title" class="text-2xl font-semibold text-fedex-dark-gray mb-6">Create New Shipment</h2>
+                 <form id="shipment-form" class="bg-white rounded-lg shadow-md p-6 space-y-6"></form>
+            </div>
+        </div>
+
+        <div id="admin-security-section" class="admin-form-section">
+            <h2 class="text-2xl font-semibold text-fedex-dark-gray mb-6">Change Password</h2>
+            <div class="bg-white rounded-lg shadow-md p-8 max-w-lg mx-auto">
+                <form id="password-change-form" class="space-y-6">
+                    <div>
+                        <label for="current-password" class="admin-label">Current Password</label>
+                        <input type="password" id="current-password" class="admin-input" required>
+                    </div>
+                     <div>
+                        <label for="new-password" class="admin-label">New Password</label>
+                        <input type="password" id="new-password" class="admin-input" required>
+                    </div>
+                     <div>
+                        <label for="confirm-password" class="admin-label">Confirm New Password</label>
+                        <input type="password" id="confirm-password" class="admin-input" required>
+                    </div>
+                    <button type="submit" class="w-full fedex-button text-white py-3 rounded-lg font-semibold">Update Password</button>
+                </form>
+            </div>
         </div>
     </div>
   </div>
 
-
   <script>
-    // --- MOCK DATABASE ---
-    // This object acts as our backend database. All CRUD operations will modify this object.
+    // --- APPLICATION STATE & DATABASE ---
+    const AppState = {
+        adminCredentials: { username: 'admin', password: 'admin111' },
+        logoClickCount: 0,
+        logoClickTimer: null
+    };
+
     const trackingDatabase = {
       'FD26031998KR': {
-        trackingNumber: 'FD26031998KR',
-        status: 'Awaiting Clearance',
-        service: 'FedEx International Priority',
-        currentLocation: 'FedEx Office Paris, France',
-        estimatedDelivery: 'Pending clearance approval',
-        shipDate: 'June 22, 2025',
-        weight: '2,840 lbs',
-        dimensions: '72" x 84" x 48"',
-        declaredValue: '$424,000.00',
-        contents: '3 Tesla vehicles, Diamond jewelry',
-        reference: 'HIGH-VALUE-SHIPMENT',
-        insurance: 'Full Coverage ($424,000.00)',
-        progress: 20,
-        requiresClearance: true,
-        sender: {
-          name: 'Keanu Reeves',
-          company: 'FedEx Office Paris',
-          address: '15 Rue de la Paix',
-          city: '75001 Paris, France',
-          phone: '+33 1 42 61 50 50'
-        },
-        recipient: {
-          name: 'Kavita Dinanauth',
-          address: '2103 Belladora Road',
-          city: 'Conway, SC 29527, USA',
-          phone: '(843) 555-0123',
-          email: 'fedexpressdeliveryservices231@gmail.com'
-        },
+        trackingNumber: 'FD26031998KR', status: 'Awaiting Clearance', service: 'FedEx International Priority', currentLocation: 'FedEx Office Paris, France', estimatedDelivery: 'Pending clearance approval', shipDate: 'June 22, 2025', weight: '2,840 lbs', dimensions: '72" x 84" x 48"', declaredValue: '$424,000.00', progress: 20, requiresClearance: true,
+        sender: { name: 'Keanu Reeves', company: 'FedEx Office Paris', address: '15 Rue de la Paix', city: '75001 Paris, France', phone: '+33 1 42 61 50 50' },
+        recipient: { name: 'Kavita Dinanauth', address: '2103 Belladora Road', city: 'Conway, SC 29527, USA', phone: '(843) 555-0123', email: 'fedexpressdeliveryservices231@gmail.com' },
         timeline: [
-          {
-            status: 'Awaiting recipient clearance',
-            location: 'PARIS, FR',
-            date: 'June 22, 2025',
-            time: '1:45 PM',
-            description: 'Package registered at FedEx Office Paris. Awaiting recipient clearance before shipping.',
-            isLatest: true,
-          },
-          {
-            status: 'Registered at FedEx facility',
-            location: 'PARIS, FR',
-            date: 'June 22, 2025',
-            time: '1:45 PM',
-            description: 'High-value package registered and secured at FedEx Office Paris',
-            isLatest: false,
-          }
+          { status: 'Awaiting recipient clearance', location: 'PARIS, FR', date: 'June 22, 2025', time: '1:45 PM', description: 'Package registered at FedEx Office Paris. Awaiting recipient clearance.'},
+          { status: 'Registered at FedEx facility', location: 'PARIS, FR', date: 'June 22, 2025', time: '1:45 PM', description: 'High-value package registered and secured.'}
         ]
       }
     };
 
-    // --- UTILITY FUNCTIONS ---
+    // --- UTILITY & CORE FUNCTIONS ---
     function showNotification(message, type = 'info') {
-      const container = document.body;
       const notification = document.createElement('div');
       notification.className = `notification ${type}`;
       notification.innerHTML = `<span>${message}</span>`;
-      container.appendChild(notification);
-      setTimeout(() => {
-        notification.style.animation = 'slideInRight 0.5s ease-out reverse';
-        setTimeout(() => notification.remove(), 500);
-      }, 4000);
+      document.body.appendChild(notification);
+      setTimeout(() => notification.remove(), 4000);
     }
 
     function showPage(pageId) {
-      document.querySelectorAll('.page-section').forEach(page => page.classList.remove('active'));
-      const targetPage = document.getElementById(pageId + '-page');
-      if (targetPage) targetPage.classList.add('active');
+      document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId)?.classList.add('active');
     }
 
     function showModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-      }
+      document.getElementById(modalId)?.classList.add('active');
     }
 
     function closeModal(modalId) {
-      const modal = document.getElementById(modalId);
-      if (modal) {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-      }
+      document.getElementById(modalId)?.classList.remove('active');
     }
-    
-    function toggleMobileMenu() {
-      document.getElementById('mobile-menu')?.classList.toggle('hidden');
-    }
-
 
     // --- FRONTEND TRACKING LOGIC ---
     function trackPackage(trackingNumber) {
       const data = trackingDatabase[trackingNumber.toUpperCase()];
       if (data) {
-        // Ensure the `isLatest` flag is correctly set before displaying
-        data.timeline.forEach((event, index) => {
-            event.isLatest = (index === 0);
-        });
         displayTrackingModal(data);
         return true;
       }
@@ -622,326 +358,199 @@
     }
 
     function displayTrackingModal(data) {
-      const modal = document.getElementById('tracking-modal');
-      const modalContent = document.getElementById('modal-content');
-      const trackingNumberElement = document.getElementById('modal-tracking-number');
-      
-      trackingNumberElement.textContent = data.trackingNumber;
-      modalContent.innerHTML = generateTrackingContent(data);
-      
-      showModal('tracking-modal');
+        // Ensure timeline has an `isLatest` flag
+        data.timeline.forEach((event, index) => event.isLatest = (index === 0));
+        document.getElementById('modal-tracking-number').textContent = data.trackingNumber;
+        document.getElementById('modal-content').innerHTML = generateTrackingContent(data);
+        showModal('tracking-modal');
     }
 
     function generateTrackingContent(data) {
-      const getStatusClass = (status) => {
-        const lowerStatus = status.toLowerCase();
-        if (lowerStatus.includes('delivered')) return 'status-delivered';
-        if (lowerStatus.includes('transit')) return 'status-in-transit';
-        if (lowerStatus.includes('clearance')) return 'status-clearance';
-        return 'status-registered';
-      };
-
-      const getProgressSteps = (status) => {
-          const lowerStatus = status.toLowerCase();
-          const steps = [
-            { name: 'Registered', icon: 'check', status: 'completed' },
-            { name: 'Awaiting Clearance', icon: 'clipboard-check', status: '' },
-            { name: 'In Transit', icon: 'plane', status: '' },
-            { name: 'Out for Delivery', icon: 'truck', status: '' },
-            { name: 'Delivered', icon: 'home', status: '' }
-          ];
-
-          if (lowerStatus.includes('clearance')) {
-              steps[1].status = 'current';
-          } else if (lowerStatus.includes('transit')) {
-              steps[1].status = 'completed';
-              steps[2].status = 'current';
-          } else if (lowerStatus.includes('delivery')) {
-              steps[1].status = 'completed';
-              steps[2].status = 'completed';
-              steps[3].status = 'current';
-          } else if (lowerStatus.includes('delivered')) {
-              steps.forEach(s => s.status = 'completed');
-          }
-          return steps;
-      };
-
-      return `
-        <!-- Status Section -->
-        <div class="bg-fedex-light-gray rounded-lg p-4 sm:p-6 mb-6">
-          <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center space-y-4 lg:space-y-0 mb-6">
-            <div>
-              <div class="flex items-center space-x-3 mb-3">
-                <span class="status-badge ${getStatusClass(data.status)}">
-                  <i class="fas fa-clock mr-2"></i>${data.status}
-                </span>
-                <span class="text-fedex-gray text-sm sm:text-base">${data.service}</span>
-              </div>
-              <p class="text-fedex-dark-gray font-semibold text-base sm:text-lg">Expected delivery: ${data.estimatedDelivery}</p>
+        // This function dynamically builds the HTML for the tracking details modal
+        // It remains largely the same as the previous version, focusing on displaying shipment data
+        const timelineHTML = data.timeline.map(event => `
+            <div class="relative pl-8 mb-6 border-l-2 ${event.isLatest ? 'border-fedex-orange' : 'border-gray-200'}">
+                <div class="absolute -left-[11px] top-1 w-5 h-5 rounded-full ${event.isLatest ? 'bg-fedex-orange' : 'bg-fedex-green'}"></div>
+                <p class="font-bold text-fedex-dark-gray">${event.status}</p>
+                <p class="text-sm text-fedex-gray">${event.location}</p>
+                <p class="text-xs text-fedex-gray">${event.date} at ${event.time}</p>
+                <p class="text-sm mt-1">${event.description}</p>
+            </div>`).join('');
+        
+        return `
+            <div class="mb-6 p-6 bg-fedex-light-gray rounded-lg">
+                <p class="text-lg font-bold text-fedex-purple">${data.status}</p>
+                <p class="text-fedex-gray">Estimated Delivery: <span class="font-semibold">${data.estimatedDelivery}</span></p>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mt-4"><div class="bg-fedex-green h-2.5 rounded-full" style="width: ${data.progress}%"></div></div>
             </div>
-            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3 w-full sm:w-auto">
-              <button onclick="generatePDF('${data.trackingNumber}')" class="fedex-button text-white px-4 sm:px-6 py-3 rounded-lg font-semibold w-full sm:w-auto"><i class="fas fa-file-pdf mr-2"></i>Download Receipt</button>
-              ${data.requiresClearance ? `<button onclick="showModal('clearance-modal')" class="bg-fedex-blue text-white px-4 sm:px-6 py-3 rounded-lg font-semibold w-full sm:w-auto"><i class="fas fa-unlock mr-2"></i>Request Clearance</button>` : ''}
-            </div>
-          </div>
-
-          <!-- Progress Bar -->
-          <div class="mb-4">
-            <div class="flex justify-between text-sm text-fedex-gray mb-2">
-              <span>Shipment Progress</span>
-              <span>${data.progress || 0}% Complete</span>
-            </div>
-            <div class="progress-container">
-              <div class="progress-bar" style="width: ${data.progress || 0}%"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Progress Steps -->
-        <div class="mb-8">
-            <h3 class="text-lg sm:text-xl font-bold text-fedex-dark-gray mb-6">Shipment Journey</h3>
-            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 sm:gap-4">
-                ${getProgressSteps(data.status).map(step => `
-                <div class="text-center">
-                    <div class="w-8 h-8 sm:w-12 sm:h-12 ${step.status === 'completed' ? 'bg-fedex-green' : step.status === 'current' ? 'bg-fedex-orange' : 'bg-gray-300'} rounded-full flex items-center justify-center mx-auto mb-2 relative z-10">
-                    <i class="fas fa-${step.icon} text-white text-xs sm:text-base"></i>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div><h3 class="text-xl font-bold mb-4">Shipment Timeline</h3>${timelineHTML}</div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Details</h3>
+                    <div class="space-y-2">
+                        <p><strong>From:</strong> ${data.sender.city}</p>
+                        <p><strong>To:</strong> ${data.recipient.city}</p>
+                        <p><strong>Service:</strong> ${data.service}</p>
+                        <p><strong>Weight:</strong> ${data.weight}</p>
                     </div>
-                    <h4 class="font-semibold ${step.status ? 'text-fedex-dark-gray' : 'text-gray-400'} text-xs sm:text-sm">${step.name}</h4>
                 </div>
-                `).join('')}
             </div>
-        </div>
-
-        <!-- Main Content Grid -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
-          <!-- Timeline -->
-          <div>
-            <h3 class="text-lg sm:text-xl font-bold text-fedex-dark-gray mb-6">Shipment Timeline</h3>
-            <div class="relative">
-              ${data.timeline.map((event, index) => `
-                <div class="timeline-item mb-6 pl-4 sm:pl-6 relative">
-                  <div class="timeline-dot ${event.isLatest ? 'bg-fedex-orange' : 'bg-fedex-green'}"></div>
-                  <div class="timeline-line"></div>
-                  <div class="bg-white border border-gray-200 rounded-lg p-3 sm:p-4">
-                    <h4 class="font-semibold text-fedex-dark-gray text-sm sm:text-base">${event.status}</h4>
-                    <p class="text-fedex-gray mb-1 text-sm">${event.location}</p>
-                    <p class="text-xs sm:text-sm text-fedex-gray">${event.date} ${event.time}</p>
-                    <p class="text-xs sm:text-sm text-fedex-gray mt-2">${event.description}</p>
-                  </div>
-                </div>
-              `).join('')}
-            </div>
-          </div>
-
-          <!-- Details Panel -->
-          <div>
-             <div class="bg-white border border-gray-200 rounded-lg p-4 sm:p-6 mb-6">
-              <h3 class="text-lg sm:text-xl font-bold text-fedex-dark-gray mb-4">Shipping Information</h3>
-              <div class="space-y-4 text-sm sm:text-base">
-                <div>
-                  <h4 class="font-semibold text-fedex-gray mb-2">From:</h4>
-                  <p class="text-fedex-dark-gray font-semibold">${data.sender.name}</p>
-                  <p class="text-fedex-gray">${data.sender.address}, ${data.sender.city}</p>
-                </div>
-                <div>
-                  <h4 class="font-semibold text-fedex-gray mb-2">To:</h4>
-                  <p class="text-fedex-dark-gray font-semibold">${data.recipient.name}</p>
-                  <p class="text-fedex-gray">${data.recipient.address}, ${data.recipient.city}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
+        `;
     }
 
-    function generatePDF(trackingNumber) {
-        const data = trackingDatabase[trackingNumber];
-        if (!data) {
-            showNotification('Could not generate PDF: Tracking data not found.', 'error');
+    // --- ADMIN AUTHENTICATION & SECURITY ---
+    function handleLogoClick() {
+        AppState.logoClickCount++;
+        if (AppState.logoClickCount === 3) {
+            showModal('admin-login-modal');
+            document.getElementById('login-error-msg').classList.add('hidden');
+        }
+        clearTimeout(AppState.logoClickTimer);
+        AppState.logoClickTimer = setTimeout(() => { AppState.logoClickCount = 0; }, 600);
+    }
+    
+    function handleAdminLogin(e) {
+        e.preventDefault();
+        const username = document.getElementById('admin-username').value;
+        const password = document.getElementById('admin-password').value;
+        if (username === AppState.adminCredentials.username && password === AppState.adminCredentials.password) {
+            closeModal('admin-login-modal');
+            showAdminDashboard();
+        } else {
+            document.getElementById('login-error-msg').classList.remove('hidden');
+        }
+    }
+
+    function handleChangePassword(e) {
+        e.preventDefault();
+        const current = document.getElementById('current-password').value;
+        const newPass = document.getElementById('new-password').value;
+        const confirmPass = document.getElementById('confirm-password').value;
+
+        if (current !== AppState.adminCredentials.password) {
+            showNotification('Current password is incorrect.', 'error');
             return;
         }
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.setFillColor(77, 20, 140);
-        doc.rect(0, 0, 210, 25, 'F');
-        doc.setTextColor(255, 255, 255);
-        doc.setFont('helvetica', 'bold');
-        doc.setFontSize(24);
-        doc.text('FEDEX DELIVERY', 60, 17);
-        doc.setTextColor(0, 0, 0);
-        doc.setFontSize(18);
-        doc.text('SHIPMENT RECEIPT', 20, 40);
-        doc.setFontSize(12);
-        doc.text(`Tracking Number: ${data.trackingNumber}`, 20, 50);
-        doc.text(`Status: ${data.status}`, 20, 60);
-        doc.save(`FedEx-Receipt-${data.trackingNumber}.pdf`);
-        showNotification('Receipt downloaded successfully!', 'success');
-    }
-
-    // --- ADMIN DASHBOARD LOGIC ---
-    let logoClickCount = 0;
-    let logoClickTimer;
-
-    function handleLogoClick() {
-        logoClickCount++;
-        if (logoClickCount === 3) {
-            showAdminDashboard();
+        if (newPass !== confirmPass) {
+            showNotification('New passwords do not match.', 'error');
+            return;
         }
-        clearTimeout(logoClickTimer);
-        logoClickTimer = setTimeout(() => {
-            logoClickCount = 0;
-        }, 500); // Reset after 500ms
+        if (newPass.length < 6) {
+            showNotification('Password must be at least 6 characters long.', 'error');
+            return;
+        }
+
+        AppState.adminCredentials.password = newPass;
+        showNotification('Password updated successfully!', 'success');
+        document.getElementById('password-change-form').reset();
     }
 
+
+    // --- ADMIN DASHBOARD UI & CRUD ---
     function showAdminDashboard() {
-        const dashboard = document.getElementById('admin-dashboard');
-        dashboard.style.display = 'block';
-        setTimeout(() => dashboard.style.opacity = '1', 10);
+        document.getElementById('admin-dashboard').style.display = 'block';
         renderAdminTable();
-        showAdminView('admin-table-view');
+        showAdminSection('admin-shipments-section');
     }
 
     function hideAdminDashboard() {
-        const dashboard = document.getElementById('admin-dashboard');
-        dashboard.style.opacity = '0';
-        setTimeout(() => dashboard.style.display = 'none', 300);
+        document.getElementById('admin-dashboard').style.display = 'none';
     }
-    
-    function showAdminView(viewId) {
-        document.getElementById('admin-table-view').style.display = 'none';
-        document.getElementById('admin-form-view').style.display = 'none';
-        document.getElementById(viewId).style.display = 'block';
+
+    function showAdminSection(sectionId) {
+        document.querySelectorAll('.admin-form-section').forEach(s => s.classList.remove('active'));
+        document.getElementById(sectionId)?.classList.add('active');
+        document.querySelectorAll('.admin-nav-button').forEach(b => b.classList.remove('active'));
+        document.getElementById(`admin-nav-${sectionId.split('-')[1]}`)?.classList.add('active');
     }
 
     function renderAdminTable() {
         const tableBody = document.querySelector('#shipments-table tbody');
-        tableBody.innerHTML = '';
-        for (const key in trackingDatabase) {
-            const shipment = trackingDatabase[key];
-            const row = `
-                <tr>
-                    <td class="font-semibold">${shipment.trackingNumber}</td>
-                    <td>${shipment.status}</td>
-                    <td>${shipment.sender.city}</td>
-                    <td>${shipment.recipient.city}</td>
-                    <td>${shipment.service}</td>
-                    <td class="space-x-2">
-                        <button class="edit-btn text-fedex-blue" data-id="${shipment.trackingNumber}"><i class="fas fa-edit"></i></button>
-                        <button class="delete-btn text-red-500" data-id="${shipment.trackingNumber}"><i class="fas fa-trash"></i></button>
-                    </td>
-                </tr>
-            `;
-            tableBody.innerHTML += row;
-        }
+        tableBody.innerHTML = ''; // Clear existing rows
+        Object.values(trackingDatabase).forEach(shipment => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="font-semibold">${shipment.trackingNumber}</td><td>${shipment.status}</td>
+                <td>${shipment.sender.city}</td><td>${shipment.recipient.city}</td><td>${shipment.service}</td>
+                <td class="space-x-4">
+                    <button class="edit-btn text-fedex-blue hover:underline" data-id="${shipment.trackingNumber}">Edit</button>
+                    <button class="delete-btn text-red-500 hover:underline" data-id="${shipment.trackingNumber}">Delete</button>
+                </td>`;
+            tableBody.appendChild(row);
+        });
     }
 
     function showCreateForm() {
-        document.getElementById('shipment-form').reset();
-        document.getElementById('edit-mode-tracking-number').value = '';
         document.getElementById('form-title').textContent = 'Create New Shipment';
+        document.getElementById('shipment-form').innerHTML = generateFormHTML();
         document.getElementById('form-trackingNumber').disabled = false;
-        populateTimelineEditor([]);
-        showAdminView('admin-form-view');
+        document.getElementById('admin-table-view').classList.add('hidden');
+        document.getElementById('admin-form-view').classList.remove('hidden');
     }
 
     function showEditForm(trackingNumber) {
         const data = trackingDatabase[trackingNumber];
         if (!data) return;
-
-        document.getElementById('shipment-form').reset();
-        document.getElementById('edit-mode-tracking-number').value = trackingNumber;
         document.getElementById('form-title').textContent = `Editing: ${trackingNumber}`;
-        
-        document.getElementById('form-trackingNumber').value = data.trackingNumber;
+        document.getElementById('shipment-form').innerHTML = generateFormHTML(data);
         document.getElementById('form-trackingNumber').disabled = true;
-        document.getElementById('form-status').value = data.status;
-        document.getElementById('form-progress').value = data.progress || 0;
-        document.getElementById('form-service').value = data.service;
-        document.getElementById('form-shipDate').value = data.shipDate;
-        document.getElementById('form-estimatedDelivery').value = data.estimatedDelivery;
-
-        document.getElementById('form-sender-name').value = data.sender.name;
-        document.getElementById('form-sender-company').value = data.sender.company;
-        document.getElementById('form-sender-address').value = data.sender.address;
-        document.getElementById('form-sender-city').value = data.sender.city;
-        document.getElementById('form-sender-phone').value = data.sender.phone;
-
-        document.getElementById('form-recipient-name').value = data.recipient.name;
-        document.getElementById('form-recipient-email').value = data.recipient.email;
-        document.getElementById('form-recipient-address').value = data.recipient.address;
-        document.getElementById('form-recipient-city').value = data.recipient.city;
-        document.getElementById('form-recipient-phone').value = data.recipient.phone;
-
-        populateTimelineEditor(data.timeline);
-        showAdminView('admin-form-view');
+        document.getElementById('admin-table-view').classList.add('hidden');
+        document.getElementById('admin-form-view').classList.remove('hidden');
+    }
+    
+    function generateFormHTML(data = {}) {
+        const sender = data.sender || {};
+        const recipient = data.recipient || {};
+        const timeline = data.timeline || [];
+        
+        return `
+            <input type="hidden" id="edit-mode-tracking-number" value="${data.trackingNumber || ''}">
+            <fieldset class="border p-4 rounded-lg"><legend class="font-bold text-fedex-purple px-2">Core Info</legend><div class="grid md:grid-cols-3 gap-4">
+                <div><label class="admin-label">Tracking #</label><input type="text" id="form-trackingNumber" class="admin-input" value="${data.trackingNumber || ''}" required></div>
+                <div><label class="admin-label">Status</label><input type="text" id="form-status" class="admin-input" value="${data.status || ''}" required></div>
+                <div><label class="admin-label">Progress (%)</label><input type="number" id="form-progress" class="admin-input" value="${data.progress || 0}" required></div>
+            </div></fieldset>
+            <fieldset class="border p-4 rounded-lg"><legend class="font-bold text-fedex-purple px-2">Sender</legend><div class="grid md:grid-cols-2 gap-4">
+                 <div><label class="admin-label">Name</label><input type="text" id="form-sender-name" class="admin-input" value="${sender.name || ''}"></div>
+                 <div><label class="admin-label">City</label><input type="text" id="form-sender-city" class="admin-input" value="${sender.city || ''}"></div>
+            </div></fieldset>
+            <fieldset class="border p-4 rounded-lg"><legend class="font-bold text-fedex-purple px-2">Recipient</legend><div class="grid md:grid-cols-2 gap-4">
+                 <div><label class="admin-label">Name</label><input type="text" id="form-recipient-name" class="admin-input" value="${recipient.name || ''}"></div>
+                 <div><label class="admin-label">City</label><input type="text" id="form-recipient-city" class="admin-input" value="${recipient.city || ''}"></div>
+            </div></fieldset>
+            <div class="flex justify-end space-x-4">
+                <button type="button" onclick="cancelForm()" class="border border-gray-400 text-gray-700 px-6 py-2 rounded-lg font-semibold">Cancel</button>
+                <button type="submit" class="fedex-button text-white px-6 py-2 rounded-lg font-semibold">Save Shipment</button>
+            </div>`;
+    }
+    
+    function cancelForm() {
+        document.getElementById('admin-table-view').classList.remove('hidden');
+        document.getElementById('admin-form-view').classList.add('hidden');
     }
 
     function handleFormSubmit(e) {
         e.preventDefault();
-        const editModeTrackingNumber = document.getElementById('edit-mode-tracking-number').value;
         const trackingNumber = document.getElementById('form-trackingNumber').value.toUpperCase();
-        
-        if (!trackingNumber) {
-            showNotification('Tracking Number is required.', 'error');
-            return;
-        }
+        if (!trackingNumber) { showNotification('Tracking number is required.', 'error'); return; }
 
-        // Collect timeline data
-        const timelineEntries = [];
-        document.querySelectorAll('.timeline-editor-entry').forEach(entry => {
-            const status = entry.querySelector('.timeline-status').value;
-            const location = entry.querySelector('.timeline-location').value;
-            const date = entry.querySelector('.timeline-date').value;
-            const description = entry.querySelector('.timeline-description').value;
-            if(status && location && date) {
-                timelineEntries.push({
-                    status, location, date, time: "Auto-Updated", description, isLatest: false
-                });
-            }
-        });
-        
-        // The first entry is always the latest
-        if (timelineEntries.length > 0) {
-            timelineEntries[0].isLatest = true;
-        }
+        const isEdit = !!document.getElementById('edit-mode-tracking-number').value;
+        const originalData = trackingDatabase[trackingNumber] || { timeline: [], sender: {}, recipient: {} };
 
-        const shipmentData = {
+        const updatedData = {
+            ...originalData, // Preserve fields not in the simple form
             trackingNumber: trackingNumber,
             status: document.getElementById('form-status').value,
             progress: document.getElementById('form-progress').value,
-            service: document.getElementById('form-service').value,
-            shipDate: document.getElementById('form-shipDate').value,
-            estimatedDelivery: document.getElementById('form-estimatedDelivery').value,
-            sender: {
-                name: document.getElementById('form-sender-name').value,
-                company: document.getElementById('form-sender-company').value,
-                address: document.getElementById('form-sender-address').value,
-                city: document.getElementById('form-sender-city').value,
-                phone: document.getElementById('form-sender-phone').value,
-            },
-            recipient: {
-                name: document.getElementById('form-recipient-name').value,
-                email: document.getElementById('form-recipient-email').value,
-                address: document.getElementById('form-recipient-address').value,
-                city: document.getElementById('form-recipient-city').value,
-                phone: document.getElementById('form-recipient-phone').value,
-            },
-            timeline: timelineEntries,
-            // Keep other fields or set defaults
-            requiresClearance: trackingDatabase[trackingNumber]?.requiresClearance || false,
-            weight: trackingDatabase[trackingNumber]?.weight || 'N/A',
-            dimensions: trackingDatabase[trackingNumber]?.dimensions || 'N/A',
-            declaredValue: trackingDatabase[trackingNumber]?.declaredValue || '$0.00',
+            sender: { ...originalData.sender, name: document.getElementById('form-sender-name').value, city: document.getElementById('form-sender-city').value },
+            recipient: { ...originalData.recipient, name: document.getElementById('form-recipient-name').value, city: document.getElementById('form-recipient-city').value },
         };
-
-        trackingDatabase[trackingNumber] = shipmentData;
-        showNotification(`Shipment ${editModeTrackingNumber ? 'updated' : 'created'} successfully!`, 'success');
+        trackingDatabase[trackingNumber] = updatedData;
+        showNotification(`Shipment ${isEdit ? 'updated' : 'created'} successfully!`, 'success');
         renderAdminTable();
-        showAdminView('admin-table-view');
+        cancelForm();
     }
-
+    
     function deleteShipment(trackingNumber) {
         if (confirm(`Are you sure you want to delete shipment ${trackingNumber}?`)) {
             delete trackingDatabase[trackingNumber];
@@ -949,92 +558,40 @@
             renderAdminTable();
         }
     }
+
+
+    // --- EVENT LISTENERS SETUP ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Main Tracking Form
+        document.getElementById('tracking-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const trackingNumber = document.getElementById('tracking-number').value.trim();
+            trackPackage(trackingNumber) || showNotification('Tracking number not found.', 'error');
+        });
+
+        // Admin Auth
+        document.getElementById('admin-login-form').addEventListener('submit', handleAdminLogin);
+        document.getElementById('password-change-form').addEventListener('submit', handleChangePassword);
+
+        // Admin CRUD
+        document.getElementById('show-create-form-btn').addEventListener('click', showCreateForm);
+        document.getElementById('shipments-table').addEventListener('click', (e) => {
+            const editBtn = e.target.closest('.edit-btn');
+            const deleteBtn = e.target.closest('.delete-btn');
+            if (editBtn) showEditForm(editBtn.dataset.id);
+            if (deleteBtn) deleteShipment(deleteBtn.dataset.id);
+        });
+        document.getElementById('shipment-form').addEventListener('submit', handleFormSubmit);
+    });
     
-    function addTimelineEntry(event = {}) {
-        const container = document.getElementById('timeline-editor');
-        const entryDiv = document.createElement('div');
-        entryDiv.className = 'timeline-editor-entry';
-        entryDiv.innerHTML = `
-            <input type="text" class="admin-input timeline-status" placeholder="Status" value="${event.status || ''}">
-            <input type="text" class="admin-input timeline-location" placeholder="Location" value="${event.location || ''}">
-            <input type="text" class="admin-input timeline-date" placeholder="Date" value="${event.date || ''}">
-            <input type="text" class="admin-input timeline-description" placeholder="Description" value="${event.description || ''}">
-            <button type="button" class="remove-timeline-btn text-red-500 hover:text-red-700 text-lg">×</button>
-        `;
-        container.appendChild(entryDiv);
-        entryDiv.querySelector('.remove-timeline-btn').addEventListener('click', () => entryDiv.remove());
-    }
-
-    function populateTimelineEditor(timeline) {
-        const container = document.getElementById('timeline-editor');
-        container.innerHTML = '';
-        timeline.forEach(event => addTimelineEntry(event));
-    }
-
-
-    // --- EVENT LISTENERS ---
-    function setupEventListeners() {
-      // Main Tracking Form
-      document.getElementById('tracking-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const trackingNumber = document.getElementById('tracking-number').value.trim();
-        const trackButton = document.getElementById('track-button');
-        const trackText = document.getElementById('track-text');
-        const trackLoading = document.getElementById('track-loading');
-        
-        if (!trackingNumber) {
-          showNotification('Please enter a tracking number.', 'error');
-          return;
-        }
-
-        trackText.classList.add('hidden');
-        trackLoading.classList.remove('hidden');
-        trackButton.disabled = true;
-        
-        setTimeout(() => {
-          if (!trackPackage(trackingNumber)) {
-            showNotification('Tracking number not found. Please check and try again.', 'error');
-          }
-          trackText.classList.remove('hidden');
-          trackLoading.classList.add('hidden');
-          trackButton.disabled = false;
-        }, 1000);
-      });
-
-      // Close Tracking Modal
-      document.getElementById('close-modal').addEventListener('click', () => closeModal('tracking-modal'));
-
-      // Admin Dashboard Triggers
-      document.getElementById('fedex-logo').addEventListener('click', handleLogoClick);
-      document.getElementById('close-admin-dashboard').addEventListener('click', hideAdminDashboard);
-      
-      // Admin View Navigation
-      document.getElementById('show-create-form-btn').addEventListener('click', showCreateForm);
-      document.getElementById('cancel-form-btn').addEventListener('click', () => showAdminView('admin-table-view'));
-
-      // Admin Form and Table Actions
-      document.getElementById('shipment-form').addEventListener('submit', handleFormSubmit);
-      document.querySelector('#shipments-table').addEventListener('click', function(e) {
-          if (e.target.closest('.edit-btn')) {
-              const id = e.target.closest('.edit-btn').dataset.id;
-              showEditForm(id);
-          }
-          if (e.target.closest('.delete-btn')) {
-              const id = e.target.closest('.delete-btn').dataset.id;
-              deleteShipment(id);
-          }
-      });
-      
-      // Timeline Editor
-      document.getElementById('add-timeline-entry-btn').addEventListener('click', () => addTimelineEntry());
-    }
-
-    document.addEventListener('DOMContentLoaded', setupEventListeners);
-    window.showPage = showPage;
+    // Make key functions globally accessible for inline `onclick` attributes
     window.showModal = showModal;
     window.closeModal = closeModal;
-    window.toggleMobileMenu = toggleMobileMenu;
-    window.generatePDF = generatePDF;
+    window.showPage = showPage;
+    window.handleLogoClick = handleLogoClick;
+    window.showAdminSection = showAdminSection;
+    window.cancelForm = cancelForm;
+
   </script>
 
-</body></html>```
+</body></html>

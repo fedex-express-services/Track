@@ -21,7 +21,7 @@
   <header class="fedex-purple text-white py-4">
     <div class="container mx-auto flex justify-between items-center px-4">
       <div id="logo" class="cursor-pointer" ondblclick="handleLogoTripleClick(event)">
-        <img src="https://www.fedex.com/content/dam/fedex-com/logos/logo.png" alt="FedEx Logo" class="h-12">
+        FedEx
       </div>
       <nav class="flex space-x-4">
         <a href="#ship" class="hover:underline">Ship</a>
@@ -30,7 +30,6 @@
         <a href="#support" class="hover:underline">Support</a>
         <a href="#contact" class="hover:underline">Contact</a>
         <a href="#locations" class="hover:underline">Locations</a>
-        <a href="#about" class="hover:underline">About</a>
       </nav>
     </div>
   </header>
@@ -46,71 +45,66 @@
     </div>
   </div>
 
+  <!-- Admin Portal (Hidden by default) -->
+  <div id="adminPortal" class="hidden"></div>
+
   <!-- Main Content -->
   <main class="container mx-auto py-8 px-4">
+    <!-- Navigation -->
+    <nav class="flex space-x-4 mb-8">
+      <a href="#ship" class="hover:underline">Ship</a>
+      <a href="#track" class="hover:underline">Track</a>
+      <a href="#manage" class="hover:underline">Manage</a>
+      <a href="#support" class="hover:underline">Support</a>
+      <a href="#contact" class="hover:underline">Contact</a>
+      <a href="#locations" class="hover:underline">Locations</a>
+    </nav>
+
     <!-- Tracking Section -->
-    <section id="track" class="mb-8">
-      <h2 class="text-3xl font-bold mb-4">Track Your FedEx® Shipments</h2>
+    <section id="track">
+      <h2 class="text-3xl font-bold mb-4">Track Your Package</h2>
       <div class="bg-white p-6 rounded-lg shadow mb-4">
-        <input id="trackingNumber" type="text" placeholder="Enter your tracking number" class="w-full p-2 mb-4 border rounded">
-        <button onclick="trackPackage()" class="fedex-purple text-white p-2 rounded">Track</button>
-      </div>
-      <div id="trackingDetails" class="mt-4">
-        <h3 class="text-xl font-bold">Tracking Details</h3>
-        <div id="trackingInfo" class="bg-white p-4 rounded-lg shadow">
-          <p>Loading package information...</p>
+        <p>Enter your tracking number to get real-time updates</p>
+        <div class="mt-4">
+          <div>
+            <label for="trackingNumber" class="block mb-2">Track by tracking number</label>
+            <input id="trackingNumber" type="text" placeholder="Enter tracking number" class="w-full p-2 mb-4 border rounded">
+            <button onclick="trackPackage()" class="fedex-purple text-white p-2 rounded">Track</button>
+          </div>
         </div>
       </div>
-      <div class="mt-6">
-        <h3 class="text-2xl font-bold mb-4">Take Control of Your Deliveries</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-white p-4 rounded-lg shadow">
-            <h4 class="font-bold">Tap into More Convenience</h4>
-            <p>Track packages, create shipments, manage pickups, and more on the FedEx® Mobile app.</p>
-            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/fedex-mobile-app.png" alt="FedEx Mobile App" class="mt-4 mx-auto h-32">
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow">
-            <h4 class="font-bold">Get Deliveries Your Way</h4>
-            <p>Delivery instructions, redirects, and map view with FedEx Delivery Manager®.</p>
-            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/delivery-manager.png" alt="FedEx Delivery Manager" class="mt-4 mx-auto h-32">
-          </div>
-          <div class="bg-white p-4 rounded-lg shadow">
-            <h4 class="font-bold">Find Helpful Resources</h4>
-            <p>From starting a return to handling a door tag, see how to manage your deliveries.</p>
-            <a href="#support" class="text-blue-600 hover:underline">Learn More</a>
-          </div>
+      <div id="trackingDetails" class="hidden mt-4">
+        <h3 class="text-xl font-bold">Tracking Details</h3>
+        <div id="trackingInfo" class="bg-white p-4 rounded-lg shadow">
+          <!-- Tracking details will load here after tracking -->
         </div>
       </div>
     </section>
 
     <!-- FedEx Services -->
-    <section id="services" class="mb-8">
-      <h2 class="text-3xl font-bold mb-4">Explore FedEx Services</h2>
-      <p class="mb-4">FedEx offers a range of shipping solutions tailored to your needs.</p>
+    <section id="services" class="mt-8">
+      <h2 class="text-3xl font-bold mb-4">Our Services</h2>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div class="bg-white p-6 rounded-lg shadow text-center">
-          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/express-delivery-truck.jpg" alt="FedEx Express Delivery" class="mx-auto mb-4 h-32">
-          <h3 class="font-bold">FedEx Express</h3>
-          <p>Fast, reliable delivery for time-sensitive shipments worldwide.</p>
+          <h3 class="font-bold">Ship</h3>
+          <p>Create shipping labels and schedule pickups</p>
           <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
         </div>
         <div class="bg-white p-6 rounded-lg shadow text-center">
-          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/ground-delivery-truck.jpg" alt="FedEx Ground Delivery" class="mx-auto mb-4 h-32">
-          <h3 class="font-bold">FedEx Ground</h3>
-          <p>Cost-effective shipping for domestic packages with guaranteed delivery.</p>
-          <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
+          <h3 class="font-bold">Track</h3>
+          <p>Monitor your shipments in real-time</p>
+          <a href="#track" class="text-blue-600 hover:underline">Learn More</a>
         </div>
         <div class="bg-white p-6 rounded-lg shadow text-center">
-          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/freight-delivery.jpg" alt="FedEx Freight Delivery" class="mx-auto mb-4 h-32">
-          <h3 class="font-bold">FedEx Freight</h3>
-          <p>Efficient solutions for large shipments and freight services.</p>
-          <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
+          <h3 class="font-bold">Manage</h3>
+          <p>Access your shipping history and preferences</p>
+          <a href="#manage" class="text-blue-600 hover:underline">Learn More</a>
         </div>
       </div>
     </section>
 
     <!-- Package Clearance Request -->
-    <section id="clearance" class="mb-8">
+    <section id="clearance" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">Package Clearance Request</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <p>Your package requires clearance approval before shipping can proceed to your destination.</p>
@@ -129,21 +123,18 @@
     </section>
 
     <!-- Ship with FedEx -->
-    <section id="ship" class="mb-8">
+    <section id="ship" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">Ship with FedEx</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <h3 class="text-xl font-bold mb-4">Create a Shipment</h3>
-        <p>FedEx One Rate: Two-day retail shipping, one flat rate. <a href="#" class="text-blue-600 hover:underline">Learn More</a></p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <h4 class="font-bold">Domestic Shipping</h4>
             <p>Ship within the United States with our comprehensive domestic services.</p>
-            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/domestic-delivery.jpg" alt="Domestic Shipping" class="mt-4 h-32">
           </div>
           <div>
             <h4 class="font-bold">International Shipping</h4>
             <p>Ship worldwide with our international shipping solutions.</p>
-            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/international-delivery.jpg" alt="International Shipping" class="mt-4 h-32">
           </div>
         </div>
         <button class="fedex-purple text-white p-2 rounded mt-4">Create Shipment</button>
@@ -158,7 +149,7 @@
     </section>
 
     <!-- Customer Support -->
-    <section id="support" class="mb-8">
+    <section id="support" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">Customer Support</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -169,21 +160,22 @@
             <button class="fedex-purple text-white p-2 rounded mt-2">Start Chat</button>
           </div>
           <div>
-            <h3 class="font-bold">Self-Service Tools</h3>
-            <p>Access help videos or browse our support resources.</p>
-            <a href="#" class="text-blue-600 hover:underline">Explore Tools</a>
+            <h3 class="font-bold">Quick Help</h3>
+            <p>Track a Package<br>Get real-time updates on your shipment</p>
+            <p>Shipping Rates<br>Calculate shipping costs and transit times</p>
+            <p>Find Locations<br>Locate nearby FedEx facilities</p>
           </div>
           <div>
-            <h3 class="font-bold">Tracking FAQs</h3>
-            <p>Find answers to common tracking questions.</p>
-            <a href="#" class="text-blue-600 hover:underline">View FAQs</a>
+            <h3 class="font-bold">Frequently Asked Questions</h3>
+            <!-- Mock FAQ content -->
+            <p>Find answers to common questions here.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Contact FedEx -->
-    <section id="contact" class="mb-8">
+    <section id="contact" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">Contact FedEx</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
@@ -213,8 +205,8 @@
       </div>
     </section>
 
-    <!-- Find Locations -->
-    <section id="locations" class="mb-8">
+    <!-- Find FedEx Locations -->
+    <section id="locations" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">Find FedEx Locations</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <p>Locate FedEx drop-off points, offices, and facilities near you.</p>
@@ -224,17 +216,15 @@
           <option>25 miles</option>
         </select>
         <button class="fedex-purple text-white p-2 rounded">Find</button>
-        <img src="https://www.fedex.com/content/dam/fedex-com/global/images/location-map.jpg" alt="FedEx Location" class="mt-4 mx-auto h-48">
       </div>
     </section>
 
     <!-- About FedEx -->
-    <section id="about" class="mb-8">
+    <section id="about" class="mt-8">
       <h2 class="text-3xl font-bold mb-4">About FedEx</h2>
       <div class="bg-white p-6 rounded-lg shadow">
         <h3 class="font-bold">Our Mission</h3>
-        <p>FedEx connects people and possibilities around the world. We provide customers and businesses worldwide with a broad portfolio of transportation, e-commerce, and business services.</p>
-        <img src="https://www.fedex.com/content/dam/fedex-com/global/images/global-operations.jpg" alt="FedEx Global Operations" class="mt-4 mx-auto h-48">
+        <p>FedEx connects people and possibilities around the world. We provide customers and businesses worldwide with a broad portfolio of transportation, e-commerce and business services.</p>
       </div>
     </section>
   </main>
@@ -244,8 +234,7 @@
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between">
         <div>
-          <img src="https://www.fedex.com/content/dam/fedex-com/logos/logo.png" alt="FedEx Logo" class="h-12 mb-4">
-          <p>Connecting people and possibilities around the world.</p>
+          <p>FedEx<br>Connecting people and possibilities around the world.</p>
         </div>
         <div>
           <h3 class="font-bold">Our Company</h3>
@@ -262,7 +251,7 @@
             <li><a href="#support" class="text-white hover:underline">Customer Support</a></li>
             <li><a href="#locations" class="text-white hover:underline">Find Locations</a></li>
             <li><a href="#" class="text-white hover:underline">Service Guide</a></li>
-            <li><a href="#services" class="text-white hover:underline">Shipping Services</a></li>
+            <li><a href="#services" class="text-white hover:underline">Shipping Tools</a></li>
           </ul>
         </div>
         <div>
@@ -287,7 +276,7 @@
           status: "Awaiting Clearance",
           facility: "FedEx International Hub, 15 Rue de la Paix, 75001 Paris, France",
           timeline: [
-            { status: "Registered", location: "Paris, France", timestamp: "2025-08-09T04:25:00Z" }
+            { status: "Registered", location: "Paris, France", timestamp: "2025-08-09T04:38:00Z" }
           ]
         }
       ]
@@ -449,9 +438,12 @@
     function trackPackage() {
       const trackingNumber = document.getElementById("trackingNumber").value;
       const pkg = mockApi.getPackage(trackingNumber);
+      const trackingDetails = document.getElementById("trackingDetails");
       if (pkg) {
+        trackingDetails.classList.remove("hidden");
         updateTrackingInfo();
       } else {
+        trackingDetails.classList.add("hidden");
         document.getElementById("trackingInfo").innerHTML = "<p>Invalid tracking number</p>";
       }
     }
@@ -471,9 +463,6 @@
         </ul>
       `;
     }
-
-    // Initialize tracking info
-    updateTrackingInfo();
   </script>
 </body>
 </html>

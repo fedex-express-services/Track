@@ -1,1588 +1,479 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FedEx delivery </title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --fedex-purple: #4D148C;
-            --fedex-orange: #FF6600;
-            --fedex-light-gray: #F5F5F5;
-            --fedex-dark-gray: #333333;
-            --fedex-blue: #0066CC;
-            --fedex-green: #009900;
-            --fedex-red: #CC0000;
-            --fedex-yellow: #FFCC00;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: white;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            position: relative;
-        }
-        
-        .logo img {
-            height: 40px;
-        }
-        
-        .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            margin-left: 10px;
-            letter-spacing: -1px;
-            font-family: 'Montserrat', sans-serif;
-        }
-        
-        .fedex-purple {
-            color: var(--fedex-purple);
-        }
-        
-        .fedex-orange {
-            color: var(--fedex-orange);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 25px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--fedex-dark-gray);
-            font-weight: 500;
-            transition: color 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--fedex-orange);
-            transition: width 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        .nav-links a:hover {
-            color: var(--fedex-orange);
-        }
-        
-        .tracking-input-container {
-            background: linear-gradient(to right, var(--fedex-purple), var(--fedex-blue));
-            padding: 40px 0;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .tracking-input-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            transform: rotate(30deg);
-        }
-        
-        .tracking-box {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 12px;
-            padding: 30px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-            position: relative;
-            z-index: 2;
-        }
-        
-        .tracking-box h2 {
-            color: var(--fedex-purple);
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 28px;
-            font-weight: 700;
-        }
-        
-        .input-group {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .input-group input {
-            flex: 1;
-            padding: 16px 20px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .input-group input:focus {
-            border-color: var(--fedex-orange);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255,102,0,0.2);
-        }
-        
-        .btn {
-            background: linear-gradient(to bottom, var(--fedex-orange), #e65c00);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            padding: 16px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(255,102,0,0.3);
-        }
-        
-        .btn:hover {
-            background: linear-gradient(to bottom, #ff7700, #d35400);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(255,102,0,0.4);
-        }
-        
-        .btn:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 5px rgba(255,102,0,0.3);
-        }
-        
-        .btn-purple {
-            background: linear-gradient(to bottom, var(--fedex-purple), #3c106e);
-            box-shadow: 0 4px 10px rgba(77,20,140,0.3);
-        }
-        
-        .btn-purple:hover {
-            background: linear-gradient(to bottom, #5d1aa9, #2e0c57);
-            box-shadow: 0 6px 15px rgba(77,20,140,0.4);
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--fedex-purple);
-            color: var(--fedex-purple);
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background: var(--fedex-purple);
-            color: white;
-        }
-        
-        /* Main Content */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px 40px;
-        }
-        
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .card {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .card:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-        }
-        
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--fedex-orange);
-        }
-        
-        .card-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .card-header i {
-            font-size: 28px;
-            margin-right: 15px;
-            color: var(--fedex-purple);
-            background: rgba(77,20,140,0.1);
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .card-header h3 {
-            color: var(--fedex-dark-gray);
-            font-size: 22px;
-            font-weight: 600;
-        }
-        
-        .card-content {
-            min-height: 120px;
-        }
-        
-        .status-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            padding-bottom: 12px;
-            border-bottom: 1px dashed #eee;
-        }
-        
-        .status-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-            padding-bottom: 0;
-        }
-        
-        .status-badge {
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-            display: inline-block;
-        }
-        
-        .badge-in-transit {
-            background-color: #e6f2ff;
-            color: var(--fedex-blue);
-            border: 1px solid #b3d7ff;
-        }
-        
-        .badge-delivered {
-            background-color: #e6ffe6;
-            color: var(--fedex-green);
-            border: 1px solid #99e699;
-        }
-        
-        .badge-exception {
-            background-color: #ffe6e6;
-            color: var(--fedex-red);
-            border: 1px solid #ffb3b3;
-        }
-        
-        .badge-warning {
-            background-color: #fff8e6;
-            color: #e6a700;
-            border: 1px solid #ffd166;
-        }
-        
-        /* Timeline */
-        .timeline-container {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 30px;
-            margin-bottom: 40px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .timeline-header h2 {
-            color: var(--fedex-purple);
-            font-size: 26px;
-            font-weight: 700;
-        }
-        
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .timeline::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(to bottom, var(--fedex-purple), var(--fedex-orange));
-            left: 30px;
-            margin-left: -2px;
-            border-radius: 10px;
-        }
-        
-        .timeline-item {
-            position: relative;
-            margin-bottom: 40px;
-            padding-left: 70px;
-        }
-        
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
-        
-        .timeline-icon {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid;
-            z-index: 1;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-        }
-        
-        .timeline-icon.pending {
-            border-color: #ccc;
-            color: #ccc;
-        }
-        
-        .timeline-icon.active {
-            border-color: var(--fedex-orange);
-            color: var(--fedex-orange);
-            background-color: #fff8f0;
-            animation: pulse 2s infinite;
-        }
-        
-        .timeline-icon.completed {
-            border-color: var(--fedex-green);
-            color: var(--fedex-green);
-            background-color: #f0fff4;
-        }
-        
-        .timeline-content {
-            background-color: var(--fedex-light-gray);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 3px solid var(--fedex-orange);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-            transition: all 0.3s;
-        }
-        
-        .timeline-content:hover {
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        
-        .timeline-date {
-            font-weight: 600;
-            color: var(--fedex-purple);
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-        }
-        
-        .timeline-date i {
-            margin-right: 8px;
-        }
-        
-        .timeline-location {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--fedex-blue);
-            display: flex;
-            align-items: center;
-        }
-        
-        .timeline-location i {
-            margin-right: 8px;
-        }
-        
-        /* Package Details */
-        .package-container {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .package-header {
-            margin-bottom: 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        
-        .package-header h2 {
-            color: var(--fedex-purple);
-            margin-bottom: 0;
-            font-size: 26px;
-            font-weight: 700;
-        }
-        
-        .package-details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-        }
-        
-        .detail-group {
-            margin-bottom: 20px;
-        }
-        
-        .detail-group h3 {
-            color: var(--fedex-blue);
-            margin-bottom: 15px;
-            font-size: 20px;
-            font-weight: 600;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #eee;
-        }
-        
-        .detail-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .detail-item:last-child {
-            border-bottom: none;
-        }
-        
-        .detail-label {
-            font-weight: 500;
-            color: #666;
-            flex: 1;
-        }
-        
-        .detail-value {
-            font-weight: 600;
-            text-align: right;
-            flex: 1;
-        }
-        
-        .highlight-value {
-            color: var(--fedex-orange);
-            font-weight: 700;
-            font-size: 18px;
-        }
-        
-        .warning-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: #fff8e6;
-            color: #e6a700;
-            padding: 8px 20px;
-            border-radius: 30px;
-            font-size: 15px;
-            margin-top: 10px;
-            border: 1px solid #ffd166;
-            font-weight: 500;
-        }
-        
-        .warning-badge i {
-            margin-right: 10px;
-            font-size: 18px;
-        }
-        
-        /* Package Images */
-        .package-images {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 25px;
-        }
-        
-        .package-image {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
-        }
-        
-        .package-image img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.3s;
-        }
-        
-        .package-image:hover img {
-            transform: scale(1.05);
-        }
-        
-        .package-image-label {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            padding: 8px;
-            text-align: center;
-            font-size: 12px;
-        }
-        
-        /* Admin Panel */
-        .admin-panel {
-            background-color: white;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            padding: 30px;
-            margin-bottom: 40px;
-            display: none;
-        }
-        
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid var(--fedex-purple);
-        }
-        
-        .admin-header h2 {
-            color: var(--fedex-purple);
-            font-size: 24px;
-        }
-        
-        .admin-controls {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .control-group {
-            background: var(--fedex-light-gray);
-            padding: 20px;
-            border-radius: 8px;
-            border-left: 3px solid var(--fedex-orange);
-        }
-        
-        .control-group h3 {
-            margin-bottom: 15px;
-            color: var(--fedex-purple);
-        }
-        
-        .control-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .control-btn {
-            padding: 8px 15px;
-            background: var(--fedex-purple);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        
-        .control-btn:hover {
-            background: #3c106e;
-            transform: translateY(-2px);
-        }
-        
-        .status-indicators {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-        
-        .status-indicator {
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
-        
-        .indicator-active {
-            background: var(--fedex-orange);
-            color: white;
-        }
-        
-        .indicator-completed {
-            background: var(--fedex-green);
-            color: white;
-        }
-        
-        .indicator-pending {
-            background: #ddd;
-            color: #666;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--fedex-dark-gray);
-            color: white;
-            padding: 60px 0 30px;
-            margin-top: 60px;
-        }
-        
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-        
-        .footer-section h3 {
-            color: var(--fedex-orange);
-            margin-bottom: 20px;
-            font-size: 18px;
-            font-weight: 600;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-section h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background: var(--fedex-orange);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #ccc;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .footer-links a i {
-            margin-right: 10px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            margin-top: 30px;
-            border-top: 1px solid #444;
-            color: #999;
-            font-size: 14px;
-        }
-        
-        /* Admin Modal */
-        .admin-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.85);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        .admin-modal-content {
-            background-color: white;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 500px;
-            padding: 40px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-            position: relative;
-            animation: modalIn 0.4s ease-out;
-        }
-        
-        .admin-modal-header {
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .admin-modal-header h2 {
-            color: var(--fedex-purple);
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-        
-        .admin-modal-header p {
-            color: #666;
-        }
-        
-        .admin-form-group {
-            margin-bottom: 25px;
-        }
-        
-        .admin-form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--fedex-dark-gray);
-        }
-        
-        .admin-form-group input {
-            width: 100%;
-            padding: 14px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-        
-        .admin-form-group input:focus {
-            border-color: var(--fedex-orange);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(255,102,0,0.2);
-        }
-        
-        .admin-form-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-            gap: 15px;
-        }
-        
-        .admin-form-actions button {
-            flex: 1;
-        }
-        
-        .btn-cancel {
-            background: #999;
-        }
-        
-        .btn-cancel:hover {
-            background: #777;
-        }
-        
-        /* Animations */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255,102,0,0.4); }
-            70% { box-shadow: 0 0 0 10px rgba(255,102,0,0); }
-            100% { box-shadow: 0 0 0 0 rgba(255,102,0,0); }
-        }
-        
-        @keyframes modalIn {
-            from { opacity: 0; transform: translateY(-50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        /* Utility Classes */
-        .text-center {
-            text-align: center;
-        }
-        
-        .mt-20 {
-            margin-top: 20px;
-        }
-        
-        .mb-20 {
-            margin-bottom: 20px;
-        }
-        
-        .flex-center {
-            display: flex;
-            justify-content: center;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-container {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .nav-links {
-                margin-top: 20px;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
-            
-            .input-group {
-                flex-direction: column;
-            }
-            
-            .timeline::before {
-                left: 15px;
-            }
-            
-            .timeline-item {
-                padding-left: 55px;
-            }
-            
-            .timeline-icon {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .package-header {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .package-details-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .admin-form-actions {
-                flex-direction: column;
-            }
-            
-            .admin-form-actions button {
-                width: 100%;
-            }
-            
-            .footer-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FedEx | Package Tracking</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Helvetica', 'Arial', sans-serif;
+    }
+    .fedex-purple { background-color: #4B2E83; }
+    .fedex-orange { background-color: #F96302; }
+    .fedex-white { background-color: #FFFFFF; }
+    .modal { display: none; }
+    .modal.show { display: flex; }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="header-container">
-            <div class="logo" id="fedex-logo">
-                <span class="logo-text"><span class="fedex-purple">Fed</span><span class="fedex-orange">Ex</span></span>
-            </div>
-            <nav class="nav-links">
-                <a href="#" class="active">Tracking</a>
-                <a href="#">Shipping</a>
-                <a href="#">Support</a>
-                <a href="#">Account</a>
-            </nav>
-        </div>
-    </header>
+<body class="bg-gray-100">
+  <!-- Header -->
+  <header class="fedex-purple text-white py-4">
+    <div class="container mx-auto flex justify-between items-center px-4">
+      <div id="logo" class="cursor-pointer" ondblclick="handleLogoTripleClick(event)">
+        <img src="https://www.fedex.com/content/dam/fedex-com/logos/logo.png" alt="FedEx Logo" class="h-12">
+      </div>
+      <nav class="flex space-x-4">
+        <a href="#ship" class="hover:underline">Ship</a>
+        <a href="#track" class="hover:underline">Track</a>
+        <a href="#services" class="hover:underline">Services</a>
+        <a href="#support" class="hover:underline">Support</a>
+        <a href="#contact" class="hover:underline">Contact</a>
+        <a href="#locations" class="hover:underline">Locations</a>
+        <a href="#about" class="hover:underline">About</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Tracking Input Section -->
-    <section class="tracking-input-container">
-        <div class="tracking-box">
-            <h2>Track Your Shipment</h2>
-            <div class="input-group">
-                <input type="text" id="tracking-number" placeholder="Enter your tracking number" value="FX987654321098">
-                <button class="btn" id="track-btn">Track</button>
-            </div>
-            <p class="text-center mt-20" style="color: #666;">Example tracking numbers: FX123456789012, FX987654321098</p>
+  <!-- Admin Modal -->
+  <div id="adminModal" class="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-full max-w-md">
+      <h2 class="text-2xl font-bold mb-4">Admin Login</h2>
+      <input id="adminUsername" type="text" placeholder="Username" class="w-full p-2 mb-4 border rounded">
+      <input id="adminPassword" type="password" placeholder="Password" class="w-full p-2 mb-4 border rounded">
+      <button onclick="loginAdmin()" class="fedex-purple text-white p-2 rounded w-full">Login</button>
+      <button onclick="closeAdminModal()" class="mt-2 text-gray-500">Cancel</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto py-8 px-4">
+    <!-- Tracking Section -->
+    <section id="track" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Track Your FedEx® Shipments</h2>
+      <div class="bg-white p-6 rounded-lg shadow mb-4">
+        <input id="trackingNumber" type="text" placeholder="Enter your tracking number" class="w-full p-2 mb-4 border rounded">
+        <button onclick="trackPackage()" class="fedex-purple text-white p-2 rounded">Track</button>
+      </div>
+      <div id="trackingDetails" class="mt-4">
+        <h3 class="text-xl font-bold">Tracking Details</h3>
+        <div id="trackingInfo" class="bg-white p-4 rounded-lg shadow">
+          <p>Loading package information...</p>
         </div>
+      </div>
+      <div class="mt-6">
+        <h3 class="text-2xl font-bold mb-4">Take Control of Your Deliveries</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h4 class="font-bold">Tap into More Convenience</h4>
+            <p>Track packages, create shipments, manage pickups, and more on the FedEx® Mobile app.</p>
+            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/fedex-mobile-app.png" alt="FedEx Mobile App" class="mt-4 mx-auto h-32">
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h4 class="font-bold">Get Deliveries Your Way</h4>
+            <p>Delivery instructions, redirects, and map view with FedEx Delivery Manager®.</p>
+            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/delivery-manager.png" alt="FedEx Delivery Manager" class="mt-4 mx-auto h-32">
+          </div>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h4 class="font-bold">Find Helpful Resources</h4>
+            <p>From starting a return to handling a door tag, see how to manage your deliveries.</p>
+            <a href="#support" class="text-blue-600 hover:underline">Learn More</a>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- Main Content -->
-    <div class="container">
-        <div class="dashboard">
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-box"></i>
-                    <h3>Shipment Overview</h3>
-                </div>
-                <div class="card-content">
-                    <div class="status-item">
-                        <span>Tracking Number</span>
-                        <span>FX987654321098</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Status</span>
-                        <span class="status-badge badge-warning" id="current-status">Awaiting Clearance</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Estimated Delivery</span>
-                        <span id="delivery-estimate">Wed, Aug 16, 2023 by 12:00 PM</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Route Information</h3>
-                </div>
-                <div class="card-content">
-                    <div class="status-item">
-                        <span>Origin</span>
-                        <span>Paris, France</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Destination</span>
-                        <span>East Keilor, Australia</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Distance</span>
-                        <span>16,900 km</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="card">
-                <div class="card-header">
-                    <i class="fas fa-user"></i>
-                    <h3>Recipient Information</h3>
-                </div>
-                <div class="card-content">
-                    <div class="status-item">
-                        <span>Name</span>
-                        <span>Julie-Anne Rawlinson</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Address</span>
-                        <span>20 Clarks Rd, East Keilor</span>
-                    </div>
-                    <div class="status-item">
-                        <span>Status</span>
-                        <span>Signature Required</span>
-                    </div>
-                </div>
-            </div>
+    <!-- FedEx Services -->
+    <section id="services" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Explore FedEx Services</h2>
+      <p class="mb-4">FedEx offers a range of shipping solutions tailored to your needs.</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="bg-white p-6 rounded-lg shadow text-center">
+          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/express-delivery-truck.jpg" alt="FedEx Express Delivery" class="mx-auto mb-4 h-32">
+          <h3 class="font-bold">FedEx Express</h3>
+          <p>Fast, reliable delivery for time-sensitive shipments worldwide.</p>
+          <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
         </div>
-        
-        <!-- Timeline -->
-        <div class="timeline-container">
-            <div class="timeline-header">
-                <h2>Shipment Progress</h2>
-                <span class="status-badge badge-warning" id="status-badge">Awaiting Clearance</span>
-            </div>
-            
-            <div class="timeline" id="shipment-timeline">
-                <!-- Timeline items will be dynamically generated -->
-            </div>
+        <div class="bg-white p-6 rounded-lg shadow text-center">
+          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/ground-delivery-truck.jpg" alt="FedEx Ground Delivery" class="mx-auto mb-4 h-32">
+          <h3 class="font-bold">FedEx Ground</h3>
+          <p>Cost-effective shipping for domestic packages with guaranteed delivery.</p>
+          <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
         </div>
-        
-        <!-- Package Details -->
-        <div class="package-container">
-            <div class="package-header">
-                <h2>Package Details</h2>
-                <button class="btn btn-purple" id="export-pdf">
-                    <i class="fas fa-file-pdf"></i> Export to PDF
-                </button>
-            </div>
-            
-            <div class="package-details-grid">
-                <div>
-                    <div class="detail-group">
-                        <h3>Shipment Information</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Tracking Number</span>
-                            <span class="detail-value">FX987654321098</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Service Type</span>
-                            <span class="detail-value">FedEx International Priority®</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Weight</span>
-                            <span class="detail-value">28.5 kg</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Dimensions</span>
-                            <span class="detail-value">55 x 35 x 25 cm</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Total Pieces</span>
-                            <span class="detail-value">1</span>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-group">
-                        <h3>Special Handling</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Signature Required</span>
-                            <span class="detail-value">Direct Signature Required</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Insurance Value</span>
-                            <span class="detail-value highlight-value">$1,000,000.00 USD</span>
-                        </div>
-                        <div class="warning-badge">
-                            <i class="fas fa-exclamation-triangle"></i> High Value Shipment - Special Handling Required
-                        </div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="detail-group">
-                        <h3>Shipper Information</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Name</span>
-                            <span class="detail-value">Keanu Reeves</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Address</span>
-                            <span class="detail-value">12 Rue de la Paix, 75002 Paris, France</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Reference</span>
-                            <span class="detail-value">Personal Effects</span>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-group">
-                        <h3>Recipient Information</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Name</span>
-                            <span class="detail-value">Julie-Anne Rawlinson</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Address</span>
-                            <span class="detail-value">20 Clarks Rd, East Keilor, Victoria, Australia 3033</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Status</span>
-                            <span class="detail-value">Residential Delivery</span>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-group">
-                        <h3>Package Contents</h3>
-                        <div class="detail-item">
-                            <span class="detail-label">Description</span>
-                            <span class="detail-value">Personal Valuables</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Contents</span>
-                            <span class="detail-value">$1 million USD in cash, Diamonds</span>
-                        </div>
-                        <div class="detail-item">
-                            <span class="detail-label">Special Instructions</span>
-                            <span class="detail-value">Handle with extreme care</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="package-images">
-                <div class="package-image">
-                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="FedEx Package">
-                    <div class="package-image-label">FedEx Secure Package</div>
-                </div>
-                <div class="package-image">
-                    <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="FedEx Facility">
-                    <div class="package-image-label">FedEx Paris Facility</div>
-                </div>
-                <div class="package-image">
-                    <img src="https://images.unsplash.com/photo-1586528116318-73aae5331fcf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="FedEx Plane">
-                    <div class="package-image-label">FedEx Cargo Aircraft</div>
-                </div>
-                <div class="package-image">
-                    <img src="https://images.unsplash.com/photo-1605050825077-289f85b6e43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="FedEx Delivery">
-                    <div class="package-image-label">FedEx Delivery Vehicle</div>
-                </div>
-            </div>
+        <div class="bg-white p-6 rounded-lg shadow text-center">
+          <img src="https://www.fedex.com/content/dam/fedex-com/global/images/freight-delivery.jpg" alt="FedEx Freight Delivery" class="mx-auto mb-4 h-32">
+          <h3 class="font-bold">FedEx Freight</h3>
+          <p>Efficient solutions for large shipments and freight services.</p>
+          <a href="#ship" class="text-blue-600 hover:underline">Learn More</a>
         </div>
-        
-        <!-- Admin Panel -->
-        <div class="admin-panel" id="admin-panel">
-            <div class="admin-header">
-                <h2>FedEx Admin Control Center</h2>
-                <button class="btn btn-purple" id="logout-admin">Logout</button>
-            </div>
-            
-            <div class="admin-controls">
-                <div class="control-group">
-                    <h3>Shipment Status</h3>
-                    <div class="control-buttons">
-                        <button class="control-btn" data-status="clearance">Clearance Approved</button>
-                        <button class="control-btn" data-status="departed">Departed Facility</button>
-                        <button class="control-btn" data-status="transit">In Transit</button>
-                        <button class="control-btn" data-status="arrival">Arrived at Destination</button>
-                        <button class="control-btn" data-status="out">Out for Delivery</button>
-                        <button class="control-btn" data-status="delivered">Delivered</button>
-                    </div>
-                    <div class="status-indicators">
-                        <div class="status-indicator indicator-completed">Completed</div>
-                        <div class="status-indicator indicator-active">Current</div>
-                        <div class="status-indicator indicator-pending">Pending</div>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <h3>Package Information</h3>
-                    <div class="control-buttons">
-                        <button class="control-btn" id="update-location">Update Location</button>
-                        <button class="control-btn" id="update-delivery">Update Delivery Date</button>
-                        <button class="control-btn" id="add-note">Add Note</button>
-                    </div>
-                </div>
-                
-                <div class="control-group">
-                    <h3>Customer Support</h3>
-                    <div class="control-buttons">
-                        <button class="control-btn" id="create-ticket">Create Support Ticket</button>
-                        <button class="control-btn" id="contact-customer">Contact Customer</button>
-                    </div>
-                </div>
-            </div>
+      </div>
+    </section>
+
+    <!-- Package Clearance Request -->
+    <section id="clearance" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Package Clearance Request</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <p>Your package requires clearance approval before shipping can proceed to your destination.</p>
+        <form id="clearanceForm" class="mt-4">
+          <input type="text" placeholder="Full Name" class="w-full p-2 mb-4 border rounded" value="Julie-Anne Rawlinson" readonly>
+          <input type="email" placeholder="Email Address" class="w-full p-2 mb-4 border rounded">
+          <input type="tel" placeholder="Phone Number" class="w-full p-2 mb-4 border rounded">
+          <input type="text" placeholder="Address" class="w-full p-2 mb-4 border rounded" value="20 Clarks Rd, East Keilor, Victoria, Australia 3033" readonly>
+          <textarea placeholder="Additional Notes" class="w-full p-2 mb-4 border rounded"></textarea>
+          <div class="flex space-x-4">
+            <button type="button" class="fedex-purple text-white p-2 rounded">Cancel</button>
+            <button type="submit" class="fedex-orange text-white p-2 rounded">Submit Clearance Request</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Ship with FedEx -->
+    <section id="ship" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Ship with FedEx</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-bold mb-4">Create a Shipment</h3>
+        <p>FedEx One Rate: Two-day retail shipping, one flat rate. <a href="#" class="text-blue-600 hover:underline">Learn More</a></p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div>
+            <h4 class="font-bold">Domestic Shipping</h4>
+            <p>Ship within the United States with our comprehensive domestic services.</p>
+            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/domestic-delivery.jpg" alt="Domestic Shipping" class="mt-4 h-32">
+          </div>
+          <div>
+            <h4 class="font-bold">International Shipping</h4>
+            <p>Ship worldwide with our international shipping solutions.</p>
+            <img src="https://www.fedex.com/content/dam/fedex-com/global/images/international-delivery.jpg" alt="International Shipping" class="mt-4 h-32">
+          </div>
         </div>
+        <button class="fedex-purple text-white p-2 rounded mt-4">Create Shipment</button>
+        <h3 class="text-xl font-bold mt-6 mb-4">Quick Ship Calculator</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <input type="text" placeholder="From ZIP" class="p-2 border rounded" value="75001">
+          <input type="text" placeholder="To ZIP" class="p-2 border rounded" value="3033">
+          <input type="number" placeholder="Weight (lbs)" class="p-2 border rounded" value="500">
+        </div>
+        <button class="fedex-orange text-white p-2 rounded mt-4">Calculate Rate</button>
+      </div>
+    </section>
+
+    <!-- Customer Support -->
+    <section id="support" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Customer Support</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <h3 class="font-bold">Contact Information</h3>
+            <p>1-800-GO-FEDEX (1-800-463-3339)<br>Available 24/7</p>
+            <p>support@fedex.com<br>Response within 24 hours</p>
+            <button class="fedex-purple text-white p-2 rounded mt-2">Start Chat</button>
+          </div>
+          <div>
+            <h3 class="font-bold">Self-Service Tools</h3>
+            <p>Access help videos or browse our support resources.</p>
+            <a href="#" class="text-blue-600 hover:underline">Explore Tools</a>
+          </div>
+          <div>
+            <h3 class="font-bold">Tracking FAQs</h3>
+            <p>Find answers to common tracking questions.</p>
+            <a href="#" class="text-blue-600 hover:underline">View FAQs</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact FedEx -->
+    <section id="contact" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Contact FedEx</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="text-xl font-bold mb-4">Get in Touch</h3>
+        <form id="contactForm">
+          <input type="text" placeholder="Full Name" class="w-full p-2 mb-4 border rounded">
+          <input type="email" placeholder="Email" class="w-full p-2 mb-4 border rounded">
+          <select class="w-full p-2 mb-4 border rounded">
+            <option>General Inquiry</option>
+            <option>Tracking Issue</option>
+            <option>Billing Question</option>
+            <option>Shipping Problem</option>
+          </select>
+          <textarea placeholder="Message" class="w-full p-2 mb-4 border rounded"></textarea>
+          <button type="submit" class="fedex-orange text-white p-2 rounded">Send Message</button>
+        </form>
+        <h3 class="text-xl font-bold mt-6 mb-4">Office Locations</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h4 class="font-bold">Corporate Headquarters</h4>
+            <p>942 South Shady Grove Road<br>Memphis, TN 38120<br>Phone: (901) 818-7500</p>
+          </div>
+          <div>
+            <h4 class="font-bold">International Hub - Paris</h4>
+            <p>15 Rue de la Paix<br>75001 Paris, France<br>Phone: +33 1 42 61 50 50</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Find Locations -->
+    <section id="locations" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">Find FedEx Locations</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <p>Locate FedEx drop-off points, offices, and facilities near you.</p>
+        <select class="p-2 border rounded mb-4 mt-4">
+          <option>5 miles</option>
+          <option>10 miles</option>
+          <option>25 miles</option>
+        </select>
+        <button class="fedex-purple text-white p-2 rounded">Find</button>
+        <img src="https://www.fedex.com/content/dam/fedex-com/global/images/location-map.jpg" alt="FedEx Location" class="mt-4 mx-auto h-48">
+      </div>
+    </section>
+
+    <!-- About FedEx -->
+    <section id="about" class="mb-8">
+      <h2 class="text-3xl font-bold mb-4">About FedEx</h2>
+      <div class="bg-white p-6 rounded-lg shadow">
+        <h3 class="font-bold">Our Mission</h3>
+        <p>FedEx connects people and possibilities around the world. We provide customers and businesses worldwide with a broad portfolio of transportation, e-commerce, and business services.</p>
+        <img src="https://www.fedex.com/content/dam/fedex-com/global/images/global-operations.jpg" alt="FedEx Global Operations" class="mt-4 mx-auto h-48">
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="fedex-purple text-white py-8">
+    <div class="container mx-auto px-4">
+      <div class="flex flex-col md:flex-row justify-between">
+        <div>
+          <img src="https://www.fedex.com/content/dam/fedex-com/logos/logo.png" alt="FedEx Logo" class="h-12 mb-4">
+          <p>Connecting people and possibilities around the world.</p>
+        </div>
+        <div>
+          <h3 class="font-bold">Our Company</h3>
+          <ul>
+            <li><a href="#about" class="text-white hover:underline">About FedEx</a></li>
+            <li><a href="#" class="text-white hover:underline">Investor Relations</a></li>
+            <li><a href="#" class="text-white hover:underline">Careers</a></li>
+            <li><a href="#" class="text-white hover:underline">Sustainability</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold">Support</h3>
+          <ul>
+            <li><a href="#support" class="text-white hover:underline">Customer Support</a></li>
+            <li><a href="#locations" class="text-white hover:underline">Find Locations</a></li>
+            <li><a href="#" class="text-white hover:underline">Service Guide</a></li>
+            <li><a href="#services" class="text-white hover:underline">Shipping Services</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-bold">Connect</h3>
+          <p>Emergency Support: 1-800-FEDEX-911</p>
+        </div>
+      </div>
+      <p class="mt-8 text-center">© 2025 FedEx Corporation. All rights reserved.</p>
     </div>
-    
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>Tracking</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-search"></i> Track by Reference</a></li>
-                    <li><a href="#"><i class="fas fa-question-circle"></i> Tracking Help</a></li>
-                    <li><a href="#"><i class="fas fa-truck"></i> Manage Delivery</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Shipping</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-shipping-fast"></i> Create a Shipment</a></li>
-                    <li><a href="#"><i class="fas fa-dollar-sign"></i> Rates & Transit Times</a></li>
-                    <li><a href="#"><i class="fas fa-calendar-alt"></i> Schedule a Pickup</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-headset"></i> Customer Support</a></li>
-                    <li><a href="#"><i class="fas fa-file-alt"></i> Claims</a></li>
-                    <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Report a Problem</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h3>About FedEx</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-briefcase"></i> Careers</a></li>
-                    <li><a href="#"><i class="fas fa-chart-line"></i> Investor Relations</a></li>
-                    <li><a href="#"><i class="fas fa-leaf"></i> Sustainability</a></li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            &copy; 1995-2023 FedEx. All Rights Reserved. | Terms of Use | Privacy Policy
-        </div>
-    </footer>
-    
-    <!-- Admin Modal -->
-    <div class="admin-modal" id="admin-modal">
-        <div class="admin-modal-content">
-            <div class="admin-modal-header">
-                <h2>FedEx Admin Portal</h2>
-                <p>Restricted Access - Authorized Personnel Only</p>
-            </div>
-            
-            <div class="admin-form-group">
-                <label for="admin-username">Username</label>
-                <input type="text" id="admin-username" placeholder="Enter admin username">
-            </div>
-            
-            <div class="admin-form-group">
-                <label for="admin-password">Password</label>
-                <input type="password" id="admin-password" placeholder="Enter admin password">
-            </div>
-            
-            <div class="admin-form-actions">
-                <button class="btn btn-cancel" id="cancel-admin">Cancel</button>
-                <button class="btn btn-purple" id="login-admin">Login</button>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // Shipment timeline data
-        const timelineData = [
-            {
-                id: 1,
-                icon: "clipboard-check",
-                status: "completed",
-                date: "Aug 11, 2023 09:15 AM",
-                location: "Paris, France",
-                description: "Shipment information sent to FedEx",
-                note: ""
-            },
-            {
-                id: 2,
-                icon: "box-open",
-                status: "completed",
-                date: "Aug 11, 2023 01:45 PM",
-                location: "Paris, France",
-                description: "Picked up by FedEx",
-                note: ""
-            },
-            {
-                id: 3,
-                icon: "warehouse",
-                status: "completed",
-                date: "Aug 11, 2023 06:30 PM",
-                location: "FedEx Paris Facility",
-                description: "Arrived at FedEx facility",
-                note: ""
-            },
-            {
-                id: 4,
-                icon: "tasks",
-                status: "active",
-                date: "Aug 14, 2023 10:30 AM",
-                location: "FedEx Paris Facility",
-                description: "Awaiting customs clearance",
-                note: "Documentation under review"
-            },
-            {
-                id: 5,
-                icon: "plane-departure",
-                status: "pending",
-                date: "",
-                location: "Paris Charles de Gaulle Airport",
-                description: "Departed FedEx facility",
-                note: ""
-            },
-            {
-                id: 6,
-                icon: "plane",
-                status: "pending",
-                date: "",
-                location: "Melbourne, Australia",
-                description: "Arrived at destination airport",
-                note: ""
-            },
-            {
-                id: 7,
-                icon: "warehouse",
-                status: "pending",
-                date: "",
-                location: "Melbourne, Australia",
-                description: "Arrived at FedEx facility",
-                note: ""
-            },
-            {
-                id: 8,
-                icon: "truck",
-                status: "pending",
-                date: "",
-                location: "East Keilor, Australia",
-                description: "On FedEx vehicle for delivery",
-                note: ""
-            },
-            {
-                id: 9,
-                icon: "home",
-                status: "pending",
-                date: "",
-                location: "East Keilor, Australia",
-                description: "Delivered",
-                note: ""
-            }
-        ];
-        
-        // Render timeline function
-        function renderTimeline() {
-            const timelineContainer = document.getElementById('shipment-timeline');
-            timelineContainer.innerHTML = '';
-            
-            timelineData.forEach(item => {
-                const timelineItem = document.createElement('div');
-                timelineItem.className = 'timeline-item';
-                
-                let iconClass = '';
-                if (item.status === 'completed') {
-                    iconClass = 'completed';
-                } else if (item.status === 'active') {
-                    iconClass = 'active';
-                } else {
-                    iconClass = 'pending';
-                }
-                
-                timelineItem.innerHTML = `
-                    <div class="timeline-icon ${iconClass}">
-                        <i class="fas fa-${item.icon}"></i>
-                    </div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">
-                            <i class="far fa-calendar-alt"></i> ${item.date || 'Pending'}
-                        </div>
-                        <div class="timeline-location">
-                            <i class="fas fa-map-marker-alt"></i> ${item.location}
-                        </div>
-                        <p>${item.description}</p>
-                        ${item.note ? `<p class="warning-badge" style="margin-top:10px;"><i class="fas fa-info-circle"></i> ${item.note}</p>` : ''}
-                    </div>
-                `;
-                
-                timelineContainer.appendChild(timelineItem);
-            });
+  </footer>
+
+  <!-- JavaScript for Interactivity and Mock API -->
+  <script>
+    // Mock Database
+    let mockDatabase = {
+      packages: [
+        {
+          trackingNumber: "FX1234567890",
+          sender: { name: "Keanu Reeves", address: "15 Rue de la Paix, 75001 Paris, France" },
+          recipient: { name: "Julie-Anne Rawlinson", address: "20 Clarks Rd, East Keilor, Victoria, Australia 3033" },
+          contents: "2 Tesla vehicles, $1 million in cash, diamonds",
+          status: "Awaiting Clearance",
+          facility: "FedEx International Hub, 15 Rue de la Paix, 75001 Paris, France",
+          timeline: [
+            { status: "Registered", location: "Paris, France", timestamp: "2025-08-09T04:25:00Z" }
+          ]
         }
-        
-        // Admin access functionality
-        let clickCount = 0;
-        let lastClickTime = 0;
-        const logo = document.getElementById('fedex-logo');
-        const adminModal = document.getElementById('admin-modal');
-        const cancelAdminBtn = document.getElementById('cancel-admin');
-        const loginAdminBtn = document.getElementById('login-admin');
-        const adminPanel = document.getElementById('admin-panel');
-        const logoutAdminBtn = document.getElementById('logout-admin');
-        
-        logo.addEventListener('click', function(e) {
-            const currentTime = new Date().getTime();
-            
-            if (currentTime - lastClickTime > 500) {
-                clickCount = 0;
-            }
-            
-            clickCount++;
-            lastClickTime = currentTime;
-            
-            if (clickCount === 3) {
-                adminModal.style.display = 'flex';
-                clickCount = 0;
-            }
+      ]
+    };
+
+    // Mock API
+    const mockApi = {
+      getPackage: (trackingNumber) => {
+        return mockDatabase.packages.find(pkg => pkg.trackingNumber === trackingNumber) || null;
+      },
+      updatePackage: (trackingNumber, updatedData) => {
+        const index = mockDatabase.packages.findIndex(pkg => pkg.trackingNumber === trackingNumber);
+        if (index !== -1) {
+          mockDatabase.packages[index] = { ...mockDatabase.packages[index], ...updatedData };
+          return mockDatabase.packages[index];
+        }
+        return null;
+      },
+      deletePackage: (trackingNumber) => {
+        const index = mockDatabase.packages.findIndex(pkg => pkg.trackingNumber === trackingNumber);
+        if (index !== -1) {
+          mockDatabase.packages[index].status = "Deleted";
+          return mockDatabase.packages[index];
+        }
+        return null;
+      },
+      addPackage: (newPackage) => {
+        mockDatabase.packages.push(newPackage);
+        return newPackage;
+      }
+    };
+
+    // Admin authentication
+    let clickCount = 0;
+    let clickTimeout;
+    function handleLogoTripleClick(event) {
+      clickCount++;
+      if (clickCount === 3) {
+        document.getElementById("adminModal").classList.add("show");
+        clickCount = 0;
+      }
+      clearTimeout(clickTimeout);
+      clickTimeout = setTimeout(() => clickCount = 0, 1000);
+    }
+
+    function loginAdmin() {
+      const username = document.getElementById("adminUsername").value;
+      const password = document.getElementById("adminPassword").value;
+      if (username === "admin" && password === "admin111") {
+        openAdminPortal();
+      } else {
+        alert("Invalid credentials");
+      }
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.remove("show");
+    }
+
+    function openAdminPortal() {
+      closeAdminModal();
+      const adminPortal = document.createElement("div");
+      adminPortal.innerHTML = `
+        <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div class="bg-white p-6 rounded-lg w-full max-w-4xl">
+            <h2 class="text-2xl font-bold mb-4">Admin Portal</h2>
+            <h3 class="font-bold">Manage Shipments</h3>
+            <form id="adminForm" class="mt-4">
+              <input type="text" id="adminTrackingNumber" value="${mockDatabase.packages[0].trackingNumber}" class="w-full p-2 mb-4 border rounded" readonly>
+              <input type="text" id="adminSender" value="${mockDatabase.packages[0].sender.name}" class="w-full p-2 mb-4 border rounded">
+              <input type="text" id="adminSenderAddress" value="${mockDatabase.packages[0].sender.address}" class="w-full p-2 mb-4 border rounded">
+              <input type="text" id="adminRecipient" value="${mockDatabase.packages[0].recipient.name}" class="w-full p-2 mb-4 border rounded">
+              <input type="text" id="adminRecipientAddress" value="${mockDatabase.packages[0].recipient.address}" class="w-full p-2 mb-4 border rounded">
+              <input type="text" id="adminContents" value="${mockDatabase.packages[0].contents}" class="w-full p-2 mb-4 border rounded">
+              <select id="adminStatus" class="w-full p-2 mb-4 border rounded">
+                <option ${mockDatabase.packages[0].status === "Awaiting Clearance" ? "selected" : ""}>Awaiting Clearance</option>
+                <option ${mockDatabase.packages[0].status === "In Transit" ? "selected" : ""}>In Transit</option>
+                <option ${mockDatabase.packages[0].status === "Out for Delivery" ? "selected" : ""}>Out for Delivery</option>
+                <option ${mockDatabase.packages[0].status === "Delivered" ? "selected" : ""}>Delivered</option>
+              </select>
+              <input type="text" id="adminFacility" value="${mockDatabase.packages[0].facility}" class="w-full p-2 mb-4 border rounded">
+              <button type="button" onclick="updateShipment()" class="fedex-purple text-white p-2 rounded">Update Shipment</button>
+              <button type="button" onclick="deleteShipment()" class="fedex-orange text-white p-2 rounded ml-2">Delete Shipment</button>
+              <button type="button" onclick="createNewShipment()" class="fedex-purple text-white p-2 rounded ml-2">Create New Shipment</button>
+              <button type="button" onclick="closeAdminPortal()" class="text-gray-500 p-2 mt-2">Close</button>
+            </form>
+            <h3 class="font-bold mt-4">Timeline</h3>
+            <ul id="adminTimeline" class="list-disc pl-5">
+              ${mockDatabase.packages[0].timeline.map(event => `<li>${event.status} - ${event.location} - ${new Date(event.timestamp).toLocaleString()}</li>`).join("")}
+            </ul>
+            <button onclick="addTimelineEvent()" class="fedex-purple text-white p-2 rounded mt-4">Add Timeline Event</button>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(adminPortal);
+    }
+
+    function closeAdminPortal() {
+      document.querySelector(".fixed.inset-0").remove();
+    }
+
+    function updateShipment() {
+      const updatedData = {
+        sender: {
+          name: document.getElementById("adminSender").value,
+          address: document.getElementById("adminSenderAddress").value
+        },
+        recipient: {
+          name: document.getElementById("adminRecipient").value,
+          address: document.getElementById("adminRecipientAddress").value
+        },
+        contents: document.getElementById("adminContents").value,
+        status: document.getElementById("adminStatus").value,
+        facility: document.getElementById("adminFacility").value
+      };
+      mockApi.updatePackage(mockDatabase.packages[0].trackingNumber, updatedData);
+      updateTrackingInfo();
+      alert("Shipment updated");
+    }
+
+    function deleteShipment() {
+      mockApi.deletePackage(mockDatabase.packages[0].trackingNumber);
+      updateTrackingInfo();
+      closeAdminPortal();
+      alert("Shipment deleted");
+    }
+
+    function createNewShipment() {
+      const newTrackingNumber = `FX${Math.floor(1000000000 + Math.random() * 9000000000)}`;
+      const newPackage = {
+        trackingNumber: newTrackingNumber,
+        sender: { name: "New Sender", address: "Unknown Address" },
+        recipient: { name: "New Recipient", address: "Unknown Address" },
+        contents: "Unknown Contents",
+        status: "Registered",
+        facility: "FedEx International Hub, 15 Rue de la Paix, 75001 Paris, France",
+        timeline: [
+          { status: "Registered", location: "Paris, France", timestamp: new Date().toISOString() }
+        ]
+      };
+      mockApi.addPackage(newPackage);
+      alert(`New shipment created with tracking number ${newTrackingNumber}`);
+    }
+
+    function addTimelineEvent() {
+      const newStatus = prompt("Enter new status (e.g., In Transit, Out for Delivery):");
+      const newLocation = prompt("Enter new location:");
+      if (newStatus && newLocation) {
+        mockDatabase.packages[0].timeline.push({
+          status: newStatus,
+          location: newLocation,
+          timestamp: new Date().toISOString()
         });
-        
-        cancelAdminBtn.addEventListener('click', function() {
-            adminModal.style.display = 'none';
-        });
-        
-        loginAdminBtn.addEventListener('click', function() {
-            const username = document.getElementById('admin-username').value;
-            const password = document.getElementById('admin-password').value;
-            
-            if (username === 'admin' && password === 'admin111') {
-                adminModal.style.display = 'none';
-                adminPanel.style.display = 'block';
-                document.getElementById('admin-username').value = '';
-                document.getElementById('admin-password').value = '';
-            } else {
-                alert('Invalid credentials. Please try again.');
-            }
-        });
-        
-        logoutAdminBtn.addEventListener('click', function() {
-            adminPanel.style.display = 'none';
-        });
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', function(e) {
-            if (e.target === adminModal) {
-                adminModal.style.display = 'none';
-            }
-        });
-        
-        // Track button functionality
-        document.getElementById('track-btn').addEventListener('click', function() {
-            const trackingNumber = document.getElementById('tracking-number').value;
-            if (trackingNumber.trim() === '') {
-                alert('Please enter a tracking number');
-            } else {
-                alert(`Tracking package: ${trackingNumber}. Loading shipment details...`);
-                // In a real system, this would fetch tracking data
-            }
-        });
-        
-        // Simulate Enter key press for tracking input
-        document.getElementById('tracking-number').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('track-btn').click();
-            }
-        });
-        
-        // PDF Export functionality
-        document.getElementById('export-pdf').addEventListener('click', function() {
-            alert('PDF export would generate a shipment summary. Downloading mock PDF...');
-            
-            // For demonstration purposes, we'll create a fake PDF download
-            const element = document.createElement('a');
-            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent('FedEx Shipment Summary\nTracking Number: FX987654321098\nStatus: Awaiting Clearance\nEstimated Delivery: Aug 16, 2023'));
-            element.setAttribute('download', 'FedEx_Shipment_FX987654321098.pdf');
-            
-            element.style.display = 'none';
-            document.body.appendChild(element);
-            
-            element.click();
-            
-            document.body.removeChild(element);
-        });
-        
-        // Admin control buttons
-        document.querySelectorAll('.control-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const status = this.getAttribute('data-status');
-                let message = '';
-                
-                switch(status) {
-                    case 'clearance':
-                        timelineData[3].status = 'completed';
-                        timelineData[3].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        timelineData[3].note = 'Customs clearance approved';
-                        timelineData[4].status = 'active';
-                        message = 'Customs clearance approved. Package will be processed for departure.';
-                        break;
-                    case 'departed':
-                        timelineData[4].status = 'completed';
-                        timelineData[4].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        timelineData[5].status = 'active';
-                        message = 'Package has departed Paris facility. In transit to Australia.';
-                        break;
-                    case 'transit':
-                        timelineData[5].status = 'completed';
-                        timelineData[5].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        timelineData[6].status = 'active';
-                        message = 'Package arrived at Melbourne airport. Processing at facility.';
-                        break;
-                    case 'arrival':
-                        timelineData[6].status = 'completed';
-                        timelineData[6].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        timelineData[7].status = 'active';
-                        message = 'Package processed at Melbourne facility. Ready for delivery.';
-                        break;
-                    case 'out':
-                        timelineData[7].status = 'completed';
-                        timelineData[7].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        timelineData[8].status = 'active';
-                        message = 'Package is out for delivery to recipient.';
-                        break;
-                    case 'delivered':
-                        timelineData[8].status = 'completed';
-                        timelineData[8].date = new Date().toLocaleString('en-US', { 
-                            month: 'short', 
-                            day: 'numeric', 
-                            year: 'numeric',
-                            hour: '2-digit', 
-                            minute: '2-digit'
-                        });
-                        message = 'Package delivered successfully.';
-                        document.getElementById('current-status').textContent = 'Delivered';
-                        document.getElementById('current-status').className = 'status-badge badge-delivered';
-                        document.getElementById('status-badge').textContent = 'Delivered';
-                        document.getElementById('status-badge').className = 'status-badge badge-delivered';
-                        break;
-                }
-                
-                // Update current status
-                if (status !== 'delivered') {
-                    const statusText = this.textContent;
-                    document.getElementById('current-status').textContent = statusText;
-                    document.getElementById('status-badge').textContent = statusText;
-                }
-                
-                // Update timeline display
-                renderTimeline();
-                
-                alert(`Admin action: ${message}`);
-            });
-        });
-        
-        // Initialize timeline
-        renderTimeline();
-    </script>
+        updateTrackingInfo();
+        document.getElementById("adminTimeline").innerHTML = mockDatabase.packages[0].timeline.map(event => `<li>${event.status} - ${event.location} - ${new Date(event.timestamp).toLocaleString()}</li>`).join("");
+      }
+    }
+
+    function trackPackage() {
+      const trackingNumber = document.getElementById("trackingNumber").value;
+      const pkg = mockApi.getPackage(trackingNumber);
+      if (pkg) {
+        updateTrackingInfo();
+      } else {
+        document.getElementById("trackingInfo").innerHTML = "<p>Invalid tracking number</p>";
+      }
+    }
+
+    function updateTrackingInfo() {
+      const pkg = mockDatabase.packages[0];
+      document.getElementById("trackingInfo").innerHTML = `
+        <p><strong>Tracking Number:</strong> ${pkg.trackingNumber}</p>
+        <p><strong>Sender:</strong> ${pkg.sender.name}, ${pkg.sender.address}</p>
+        <p><strong>Recipient:</strong> ${pkg.recipient.name}, ${pkg.recipient.address}</p>
+        <p><strong>Contents:</strong> ${pkg.contents}</p>
+        <p><strong>Status:</strong> ${pkg.status}</p>
+        <p><strong>Current Facility:</strong> ${pkg.facility}</p>
+        <h4 class="font-bold mt-4">Timeline</h4>
+        <ul class="list-disc pl-5">
+          ${pkg.timeline.map(event => `<li>${event.status} - ${event.location} - ${new Date(event.timestamp).toLocaleString()}</li>`).join("")}
+        </ul>
+      `;
+    }
+
+    // Initialize tracking info
+    updateTrackingInfo();
+  </script>
 </body>
 </html>
